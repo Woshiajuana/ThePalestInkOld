@@ -1,0 +1,269 @@
+%bc699{
+  background-color: #699;
+}
+%c699{
+  color: #699;
+}
+%f699{
+  fill: #699;
+}
+%f6{
+  fill: #666;
+}
+%bsb{
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}
+%df{
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+%df1{
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+}
+
+%pr{
+	position:relative;
+}
+
+%pa{
+	position:absolute;
+}
+
+%pf{
+  position:fixed;
+}
+
+%dib{
+	display:inline-block;
+}
+
+%db{
+	display:block;
+}
+
+%dn{
+	display:none;
+}
+
+%of{
+	overflow:hidden;
+	zoom:1;
+}
+
+%vam{
+	vertical-align:middle;
+}
+
+%bn{
+	border:none 0;
+}
+
+%fnone{
+	line-height:800px;
+	@extend %oh;
+}
+
+%tint{
+	text-indent:-999em;
+	@extend %oh;
+}
+
+%clearfix{
+	zoom:1;
+}
+
+%clearfix:after{
+	content:'\20';
+	display:block;
+	height:0;
+	clear:both;
+}
+
+%fl{
+	float:left;
+}
+
+%fr{
+	float:right;
+}
+
+%ma{
+	margin:0 auto;
+}
+
+%oh{
+	overflow:hidden;
+}
+
+%tac{
+	text-align:center;
+}
+
+%tar{
+	text-align:right;
+}
+
+%wryh{
+	font-family:\5FAE\8F6F\96C5\9ED1;
+}
+
+%tahoma{
+	font-family:tahoma;
+}
+
+%fwb{
+	font-weight:bold;
+}
+
+%fwn{
+	font-weight:normal;
+}
+
+%cp{
+	cursor:pointer;
+}
+
+%wordnowp{
+	display:inline-block;
+	white-space:nowrap;
+}
+
+%tdn{
+  text-decoration:none
+}
+
+%tdu{
+  text-decoration:underline;
+}
+
+%f12{
+	font-size:12px;
+}
+
+%f14{
+	font-size:14px;
+}
+
+%f16{
+	font-size:16px;
+}
+
+%f18{
+	font-size:18px;
+}
+
+%f20{
+	font-size:20px;
+}
+
+%f22{
+	font-size:22px;
+}
+
+%cfff{
+	color:#fff;
+}
+
+%c3{
+	color:#333;
+}
+
+%cc{
+	color:#ccc;
+}
+
+%c6{
+	color:#666;
+}
+
+%c9{
+	color:#999;
+}
+
+%hover{
+	color:#e74f45;
+}
+
+%hovt{
+	color:#fc8108;
+}
+
+%bgwhite{
+	background:#fff;
+}
+
+%op9{
+	opacity: .9;
+	filter: progid:DXImageTransform.Microsoft.Alpha(opacity=90);
+}
+
+%op10{
+	opacity: 1;
+	filter: progid:DXImageTransform.Microsoft.Alpha(opacity=100);
+}
+
+%w1000{
+	width:1000px;
+	@extend %ma;
+}
+
+%atrans{
+    -webkit-transition: color .2s linear;
+       -moz-transition: color .2s linear;
+       -ms-transition: color .2s linear;
+         -o-transition: color .2s linear;
+            transition: color .2s linear;
+}
+
+%noatrans{
+    -webkit-transition: all 0s linear;
+       -moz-transition: all 0s linear;
+       -ms-transition: all 0s linear;
+         -o-transition: all 0s linear;
+            transition: all 0s linear;
+}
+
+@mixin rounded($radius){
+    -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+          border-radius: $radius;
+}
+
+@mixin png($url){
+	background:url(../images/#{$url}.png) no-repeat;
+	_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true,sizingMethod=scale,src="../images/#{$url}.png");
+	_background:none
+}
+
+%rgba5{
+	background:rgba(0,0,0,.5);
+	filter:progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr='#7c000000', EndColorStr='#7c000000');
+}
+
+%rgba7{
+	background:rgba(0,0,0,.7);
+	filter:progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr='#b2000000', EndColorStr='#b2000000');
+}
+
+%rgba6{
+	background:rgba(0, 0, 0, 0.6);
+	filter:progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr='#99000000', EndColorStr='#99000000');
+}
+
+%rgba9{
+    background:rgba(255,255,255,0.9);
+    *filter:progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr='#e5ffffff', EndColorStr='#e5ffffff');
+    _background:#fff;
+}
+
+%rgba05{
+    background:rgba(0,0,0,0.5);
+    //*filter:progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr='#c000000', EndColorStr='#c000000');
+}
