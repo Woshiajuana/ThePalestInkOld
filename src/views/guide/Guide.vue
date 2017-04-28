@@ -1,15 +1,16 @@
-<script src="../../../../CodeLibrary/移动端手势/GestureMobile.js"></script>
 <template>
     <!--引导页面-->
     <div class="guide-wrap">
         <!--第一页-->
-        <div class="guide-item guide-item-active"></div>
+        <div class="guide-item" :class="{'guide-item-active': guide_index > 0}"></div>
         <!--/第一页-->
         <!--第二页-->
-        <div class="guide-item"></div>
+        <div class="guide-item" :class="{'guide-item-active': guide_index > 1}"></div>
         <!--/第二页-->
         <!--第三页-->
-        <div class="guide-item"></div>
+        <div class="guide-item" :class="{'guide-item-active': guide_index > 2}">
+            <span class="guide-go">开启浪笔头之旅</span>
+        </div>
         <!--/第三页-->
         <!--跳过按钮-->
         <svg class="guide-jump">
@@ -24,8 +25,25 @@
 
     export default {
         name: 'guide',
+        data () {
+            return {
+                guide_index: 1
+            }
+        },
         created () {
-
+            this.$nextTick(() => {
+                let _this = this;
+                GestureMobile(this.$el,{
+                    leftCallBackFun (distance) {
+                        if(_this.guide_index == 3) return;
+                        _this.guide_index++;
+                    },
+                    rightCallBackFun (distance) {
+                        if(_this.guide_index == 1) return;
+                        _this.guide_index--;
+                    }
+                });
+            })
         },
         methods: {
 
@@ -34,7 +52,6 @@
 
         }
     }
-
 </script>
 <style lang="scss">
     @import "../../assets/scss/define";
@@ -53,10 +70,10 @@
         transform: translate3d(100%,0,0);
         transition: transform .5s;
         &:nth-child(1){
-            background-color: #99A9BF;
+            background-color: #FF4949;
         }
         &:nth-child(2){
-            background-color: #EFF2F7;
+            background-color: #F7BA2A;
         }
         &:nth-child(3){
             background-color: #1F2D3D;
@@ -73,5 +90,22 @@
         top: 20px;
         right: 20px;
         fill: #1296db;
+    }
+    .guide-go{
+        @extend %pa;
+        @extend %tac;
+        @extend %f16;
+        @extend %fwb;
+        @extend %cp;
+        @extend %l50;
+        @extend %cfff;
+        border-radius: 10px;
+        width: 200px;
+        height: 45px;
+        bottom: 100px;
+        box-shadow: 0 5px 0 0 #1D8CE0;
+        margin-left: -100px;
+        line-height: 45px;
+        background-color: #58B7FF;
     }
 </style>
