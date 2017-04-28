@@ -1,8 +1,9 @@
+<script src="../../../../CodeLibrary/移动端手势/GestureMobile.js"></script>
 <template>
     <!--引导页面-->
     <div class="guide-wrap">
         <!--第一页-->
-        <div class="guide-item"></div>
+        <div class="guide-item guide-item-active"></div>
         <!--/第一页-->
         <!--第二页-->
         <div class="guide-item"></div>
@@ -11,25 +12,26 @@
         <div class="guide-item"></div>
         <!--/第三页-->
         <!--跳过按钮-->
-        <span class="guide-jump">跳过引导页</span>
+        <svg class="guide-jump">
+            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#guide-jump-icon"></use>
+        </svg>
         <!--/跳过按钮-->
     </div>
     <!--/引导页面-->
 </template>
 <script>
+    import GestureMobile from '../../assets/lib/GestureMobile'
 
     export default {
         name: 'guide',
-        components: {
+        created () {
 
         },
         methods: {
 
         },
-        data () {
-            return {
+        components: {
 
-            }
         }
     }
 
@@ -49,18 +51,27 @@
         @extend %h100;
         @extend %l0;
         transform: translate3d(100%,0,0);
-        transition: all .5s;
+        transition: transform .5s;
         &:nth-child(1){
-            background-color: #333;
+            background-color: #99A9BF;
         }
         &:nth-child(2){
-            background-color: #666;
+            background-color: #EFF2F7;
         }
         &:nth-child(3){
-            background-color: #999;
+            background-color: #1F2D3D;
         }
         &.guide-item-active{
             transform: translate3d(0,0,0);
         }
+    }
+    .guide-jump{
+        @extend %cp;
+        @extend %pa;
+        width: 30px;
+        height: 30px;
+        top: 20px;
+        right: 20px;
+        fill: #1296db;
     }
 </style>
