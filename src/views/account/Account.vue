@@ -10,6 +10,7 @@
         name: 'account',
         computed: {
             animateName () {
+                console.log(1)
                 return this.$store.state.animate_name;
             }
         }
