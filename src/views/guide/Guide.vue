@@ -1,19 +1,25 @@
 <template>
     <!--引导页面-->
     <div class="guide-wrap">
-        <!--第一页-->
-        <div class="guide-item" :class="{'guide-item-active': guide_index > 0}"></div>
-        <!--/第一页-->
-        <!--第二页-->
-        <div class="guide-item" :class="{'guide-item-active': guide_index > 1}"></div>
-        <!--/第二页-->
-        <!--第三页-->
-        <div class="guide-item" :class="{'guide-item-active': guide_index > 2}">
-            <span class="guide-go">开启浪笔头之旅</span>
+        <!--引导页-->
+        <div class="guide-item"
+             v-for="( guide_item , guide_index) in guide_arr"
+             :style="{ backgroundImage: 'url(' + guide_item.img_url + ')' }"
+             :class="{'guide-item-active': guide_active_index > guide_index}">
+            <span @click="jumpGuide()" class="guide-go" v-if=" (guide_arr.length - 1) == guide_index">开启浪笔头之旅</span>
         </div>
-        <!--/第三页-->
+        <!--/引导页-->
+        <!--引导页索引-->
+        <ul class="guide-trigger">
+            <li class="guide-trigger-item"
+                v-for="( guide_item , guide_index) in guide_arr"
+                @click="guideTrigger(guide_index)"
+                :class="{ 'guide-active-trigger': guide_active_index == (guide_index + 1) }">
+            </li>
+        </ul>
+        <!--/引导页索引-->
         <!--跳过按钮-->
-        <svg class="guide-jump">
+        <svg class="guide-jump" @click="jumpGuide()">
             <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#guide-jump-icon"></use>
         </svg>
         <!--/跳过按钮-->
@@ -22,12 +28,18 @@
 </template>
 <script>
     import GestureMobile from '../../assets/lib/GestureMobile'
-
+    import Tool from '../../assets/lib/Tool'
     export default {
         name: 'guide',
         data () {
             return {
-                guide_index: 1
+                guide_active_index: 1,
+                guide_arr: [
+                    { img_url: '../../../static/img/guide_1.jpg' },
+                    { img_url: '../../../static/img/guide_2.jpg' },
+                    { img_url: '../../../static/img/guide_3.jpg' },
+                    { img_url: '../../../static/img/guide_4.jpg' }
+                ]
             }
         },
         created () {
@@ -35,32 +47,41 @@
                 let _this = this;
                 GestureMobile(this.$el,{
                     leftCallBackFun (distance) {
-                        if(_this.guide_index == 3) return;
-                        _this.guide_index++;
+                        if(_this.guide_active_index == _this.guide_arr.length) return;
+                        _this.guide_active_index++;
                     },
                     rightCallBackFun (distance) {
-                        if(_this.guide_index == 1) return;
-                        _this.guide_index--;
+                        if(_this.guide_active_index == 1) return;
+                        _this.guide_active_index--;
                     }
                 });
             })
         },
         methods: {
-
-        },
-        components: {
-
+            /**跳过引导页面*/
+            jumpGuide () {
+                Tool.dataToLocalStorageOperate.save('is_not_first',true);
+                this.$router.push('/')
+            },
+            /**索引触发*/
+            guideTrigger (guide_index) {
+                this.guide_active_index = guide_index + 1;
+            }
         }
     }
 </script>
 <style lang="scss">
     @import "../../assets/scss/define";
     .guide-wrap{
+        z-index: 999;
         @extend %pf;
         @extend %t0;
         @extend %l0;
         @extend %b0;
         @extend %r0;
+        @extend %oh;
+        animation-duration: .5s;
+        animation-fill-mode: both;
     }
     .guide-item{
         @extend %pa;
@@ -69,24 +90,44 @@
         @extend %l0;
         transform: translate3d(100%,0,0);
         transition: transform .5s;
-        &:nth-child(1){
-            background-color: #FF4949;
-        }
-        &:nth-child(2){
-            background-color: #F7BA2A;
-        }
-        &:nth-child(3){
-            background-color: #1F2D3D;
-        }
+        repeat: no-repeat;
+        background-position: center;
+        background-attachment:fixed;
+        //filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/background.jpg', sizingMethod='scale');
+        //-ms-filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/background.jpg', sizingMethod='scale');
+        background-size: cover;
+        -moz-background-size: cover;
+        -webkit-background-size: cover;
         &.guide-item-active{
             transform: translate3d(0,0,0);
+        }
+    }
+    .guide-trigger{
+        @extend %pa;
+        @extend %tac;
+        left: 0;
+        right: 0;
+        font-size: 0;
+        bottom: 20px;
+    }
+    .guide-trigger-item{
+        @extend %cp;
+        @extend %dib;
+        width: 8px;
+        height: 8px;
+        background-color: #cccccc;
+        border-radius: 50%;
+        margin: 0 2px;
+        transition: all .5s;
+        &.guide-active-trigger{
+            background-color: #58B7FF;
         }
     }
     .guide-jump{
         @extend %cp;
         @extend %pa;
-        width: 30px;
-        height: 30px;
+        width: 20px;
+        height: 20px;
         top: 20px;
         right: 20px;
         fill: #1296db;
@@ -100,12 +141,23 @@
         @extend %l50;
         @extend %cfff;
         border-radius: 10px;
-        width: 200px;
+        width: 180px;
         height: 45px;
         bottom: 100px;
         box-shadow: 0 5px 0 0 #1D8CE0;
-        margin-left: -100px;
+        margin-left: -90px;
         line-height: 45px;
         background-color: #58B7FF;
+    },
+    .guide-wrap-hide{
+        animation-name: guide-fadeOutUp;
+    }
+    @keyframes guide-fadeOutUp {
+        from {
+            opacity: 1;
+        }
+        to {
+            transform: translate3d(0, -100%, 0);
+        }
     }
 </style>
