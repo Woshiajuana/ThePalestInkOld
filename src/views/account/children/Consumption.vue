@@ -55,7 +55,7 @@
                 is_btn_active: false,
                 sum_value: '',
                 remarks_value: '',
-                account_type_arr: [['水果零食', '出行旅游', '网上购物', '生活日常', '房屋水电', '医疗药物','其它消费']],
+                account_type_arr: [['水果零食','餐饮伙食', '出行旅游', '网上购物', '生活日常', '租房水电', '医疗药物','其它消费']],
                 account_type:['水果零食'],
                 date_value: 'TODAY',
                 time_value: Tool.format('hh:mm')

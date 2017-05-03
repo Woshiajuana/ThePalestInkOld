@@ -7,6 +7,8 @@ import Account from '../views/account/Account.vue'
 import AccountIndex from '../views/account/children/AccountIndex.vue'
 import Consumption from '../views/account/children/Consumption.vue'
 import Earn from '../views/account/children/Earn.vue'
+import Bill from '../views/bill/Bill.vue'
+import Chart from '../views/chart/Chart.vue'
 
 import Tool from '../assets/lib/Tool'
 
@@ -66,6 +68,24 @@ const router = new Router({
                     }
                 }
             ]
+        },
+        /**账单页面*/
+        {
+            path: '/bill',
+            name: 'bill',
+            component: Bill,
+            meta: {
+                status: 5
+            }
+        },
+        /**分析页面*/
+        {
+            path: '/chart',
+            name: 'chart',
+            component: Chart,
+            meta: {
+                status: 6
+            }
         }
     ]
 });

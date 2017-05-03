@@ -3,6 +3,9 @@
         <div class="home-wrap"
             :class="{'home-active': is_open}">
             <div class="balance-wrap">
+                <svg slot="icon" class="balance-icon">
+                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#type-jbgz"></use>
+                </svg>
                 <h2 class="balance-title">可用余额</h2>
                 <h1 class="balance-total">6000.00</h1>
             </div>
@@ -109,6 +112,14 @@
             bottom: 0;
             color: #999;
         }
+    }
+    .balance-icon{
+        @extend %pa;
+        top: 25%;
+        left: 25%;
+        width: 50%;
+        height: 50%;
+        fill: #ddd;
     }
     .home-btn-wrap{
         @extend %pa;

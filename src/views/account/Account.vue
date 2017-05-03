@@ -53,6 +53,7 @@
             color: red;
         }
     }
+    .bill-time-item,
     .input-item{
         height: 50px;
         line-height: 50px;
