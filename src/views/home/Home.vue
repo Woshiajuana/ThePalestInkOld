@@ -1,105 +1,58 @@
 <template>
     <div class="container-view">
-        <!--<scroller lock-x-->
-                  <!--height="-54"-->
-                  <!--:scrollbarY="true"-->
-                  <!--@on-scroll="onScroll"-->
-                  <!--:use-pulldown="true"-->
-                  <!--:use-pullup="true"-->
-                  <!--@on-pulldown-loading="onPullDownLoading"-->
-                  <!--@on-pullup-loading="onPullUpLoading"-->
-                  <!--:pulldown-config="pull_down_config"-->
-                  <!--:pullup-config="pull_up_config"-->
-                  <!--ref="homeScrollEvent">-->
-            <div class="home-wrap"
-                :class="{'home-active': is_open}">
-                <div class="balance-wrap">
-                    <h2 class="balance-title">可用余额</h2>
-                    <h1 class="balance-total">6000.00</h1>
-                </div>
-                <div class="home-btn-wrap">
-                    <span class="home-btn-item">本月可用余额</span>
-                    <span class="home-btn-item">实施计划经济</span>
-                </div>
-                <svg @click="is_open = true" slot="icon" class="home-arrow" v-show="!is_open">
-                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#nav-arrow"></use>
-                </svg>
+        <div class="home-wrap"
+            :class="{'home-active': is_open}">
+            <div class="balance-wrap">
+                <h2 class="balance-title">可用余额</h2>
+                <h1 class="balance-total">6000.00</h1>
             </div>
-        <!--</scroller>-->
+            <div class="home-btn-wrap">
+                <span class="home-btn-item">本月可用余额</span>
+                <span class="home-btn-item">实施计划经济</span>
+            </div>
+            <svg @click="is_open = true" slot="icon" class="home-arrow" v-show="!is_open">
+                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#nav-arrow"></use>
+            </svg>
+        </div>
     </div>
 </template>
 <script>
     import { Scroller } from 'vux'
     import GestureMobile from '../../assets/lib/GestureMobile'
+    import types from '../../store/mutation-types'
     export default {
         name: 'home',
         data: function () {
             return {
-                is_open: false,
-                is_loading: true,
-                pull_down_config: {
-                    content: '下拉刷新',
-                    height: 60,
-                    autoRefresh: false,
-                    downContent: '拉人家干嘛~~~',
-                    upContent: '疼~还不松开人家',
-                    loadingContent: 'Loading...',
-                    clsPrefix: 'xs-plugin-pulldown-'
-                },
-                pull_up_config: {
-                    content: '上拉加载',
-                    pullUpHeight: 60,
-                    height: 40,
-                    autoRefresh: false,
-                    downContent: '疼~还不松开人家',
-                    upContent: '拉人家干嘛~~~',
-                    loadingContent: 'Loading...',
-                    clsPrefix: 'xs-plugin-pullup-'
-                }
+                is_open: false
             }
         },
         components:{
             Scroller,
         },
         created () {
-            this.$nextTick(() => {
-                let _this = this;
-                console.log(this.$el)
-                GestureMobile(this.$el,{
-                    upCallBackFun (distance) {
-                        _this.is_open = true;
-                    },
-                    downCallBackFun (distance) {
-                        _this.is_open = false;
-                    }
-                });
-            })
+            this.gestureMobile();
+            this.setNavIndex();
         },
         methods: {
-            onScroll (pos) {
-                this.scrollTop = pos.top;
+            /**手势*/
+            gestureMobile () {
+                this.$nextTick(() => {
+                    let _this = this;
+                    GestureMobile(this.$el,{
+                        upCallBackFun () {
+                            _this.is_open = true;
+                        },
+                        downCallBackFun () {
+                            _this.is_open = false;
+                        }
+                    });
+                })
             },
-            onPullDownLoading () {
-                /**用户触发下拉刷新状态，监听该事件以获取加载新数据*/
-//                this.$store.dispatch('articleDataInit', () => {
-                        this.$nextTick(() => {
-                            this.$refs.homeScrollEvent.reset();
-                            this.$refs.homeScrollEvent.donePulldown();
-                        });
-//                    }
-//                );
-            },
-            onPullUpLoading () {
-                /**用户触发上拉加载状态，监听该事件以加载新数据*/
-//                this.$store.dispatch('articleDataLoad', () => {
-                        this.$nextTick(() => {
-                            this.$refs.homeScrollEvent.reset();
-                            this.$refs.homeScrollEvent.donePullup();
-                        })
-//                    }
-//                );
+            setNavIndex () {
+                this.$store.commit(types.SET_NAV_INDEX,'1')
             }
-        },
+        }
     }
 </script>
 <style lang="scss">

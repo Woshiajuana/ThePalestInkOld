@@ -10,25 +10,25 @@
 
         <!--导航条-->
         <tabbar>
-            <tabbar-item selected link="/">
+            <tabbar-item :selected="navIndex == 1" link="/">
                 <svg slot="icon" class="nav-item nav-home-item">
                     <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#nav-home"></use>
                 </svg>
                 <span slot="label">首页</span>
             </tabbar-item>
-            <tabbar-item link="/account">
+            <tabbar-item :selected="navIndex == 2" link="/account">
                 <svg slot="icon" class="nav-item nav-account-item">
                     <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#nav-account"></use>
                 </svg>
                 <span slot="label">记账</span>
             </tabbar-item>
-            <tabbar-item link="/bill">
+            <tabbar-item :selected="navIndex == 3" link="/bill">
                 <svg slot="icon" class="nav-item nav-bill-item">
                     <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#nav-bill"></use>
                 </svg>
                 <span slot="label">账单</span>
             </tabbar-item>
-            <tabbar-item link="/chart">
+            <tabbar-item :selected="navIndex == 4" link="/chart">
                 <svg slot="icon" class="nav-item nav-chart-item">
                     <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#nav-chart"></use>
                 </svg>
@@ -51,6 +51,9 @@
         computed: {
             animateName () {
                 return this.$store.state.animate_name;
+            },
+            navIndex () {
+                return this.$store.state.nav_index;
             }
         },
         components: {
@@ -122,6 +125,8 @@
         will-change: transform;
         -webkit-transition: all .5s;
         transition: all .5s;
+        position: absolute;
+        top: 0;
         -webkit-backface-visibility: hidden;
         backface-visibility: hidden;
         -webkit-perspective: 1000px;

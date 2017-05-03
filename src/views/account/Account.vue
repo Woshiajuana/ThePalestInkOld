@@ -83,6 +83,9 @@
         .inline-calendar td.current > span {
             background-color: #58B7FF;
         }
+        .inline-calendar td.is-today, .inline-calendar td.is-today.is-disabled {
+            color: #58B7FF;
+        }
     }
     .sure-btn{
         @extend %db;

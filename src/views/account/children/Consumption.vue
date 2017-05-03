@@ -3,7 +3,7 @@
         <h1 class="header-title">消费：</h1>
         <ul class="input-warp">
             <li class="input-item">
-                <calendar v-model="date_value" title="日期：" disable-past></calendar>
+                <calendar v-model="date_value" title="日期：" disable-future></calendar>
             </li>
             <li class="input-item">
                 <datetime
@@ -37,8 +37,12 @@
 </template>
 <script>
     import { PopupPicker, Datetime, Calendar, XInput } from 'vux'
+    import types from '../../../store/mutation-types'
     export default {
-        name: 'account',
+        name: 'consumption',
+        created () {
+            this.setNavIndex();
+        },
         components: {
             Calendar,
             Datetime,
@@ -49,11 +53,14 @@
             return {
                 account_type_arr: [['水果零食', '出行旅游', '网上购物', '生活日常', '房屋水电', '医疗药物','其它消费']],
                 account_type:['水果零食'],
-                date_value: '2016-08-18',
+                date_value: 'TODAY',
                 time_value: '18:41'
             }
         },
         methods: {
+            setNavIndex () {
+                this.$store.commit(types.SET_NAV_INDEX,'2')
+            },
             change (value) {
                 console.log('change', value)
             },
