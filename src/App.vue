@@ -67,6 +67,7 @@
     body{
         background-color: #F9FAFC;
     }
+    .home-wrap,
     .container-view{
         @extend %pa;
         @extend %t0;
@@ -75,6 +76,9 @@
         @extend %oh;
         bottom: 54px;
         background-color: #F9FAFC;
+    }
+    .home-wrap{
+        bottom: 0;
     }
     .nav-item{
         fill: #999;
@@ -118,12 +122,10 @@
         will-change: transform;
         -webkit-transition: all .5s;
         transition: all .5s;
-        top: 0;
-        position: absolute;
         -webkit-backface-visibility: hidden;
         backface-visibility: hidden;
-        -webkit-perspective: 1000;
-        perspective: 1000
+        -webkit-perspective: 1000px;
+        perspective: 1000px;
     }
     .vux-pop-out-enter {
         opacity: 0;

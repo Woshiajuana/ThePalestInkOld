@@ -62,7 +62,7 @@ const router = new Router({
                     name: 'earn',
                     component: Earn,
                     meta: {
-                        status: 5
+                        status: 4
                     }
                 }
             ]

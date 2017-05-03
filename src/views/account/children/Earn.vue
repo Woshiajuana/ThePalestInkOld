@@ -1,5 +1,5 @@
 <template>
-    <div class="container-view account-wrap">
+    <div class="earn-wrap">
         <h1 class="header-title">入账：</h1>
         <ul class="input-warp">
             <li class="input-item">
@@ -32,6 +32,7 @@
                 <x-input title="备注："></x-input>
             </li>
         </ul>
+        <i class="sure-btn sure-active-true">确认</i>
     </div>
 </template>
 <script>

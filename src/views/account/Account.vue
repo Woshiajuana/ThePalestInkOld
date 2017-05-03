@@ -1,16 +1,17 @@
 <template>
-    <transition :name="animateName">
-        <!--<keep-alive>-->
-        <router-view></router-view>
-        <!--</keep-alive>-->
-    </transition>
+    <div class="container-view">
+        <transition :name="animateName">
+            <!--<keep-alive>-->
+            <router-view></router-view>
+            <!--</keep-alive>-->
+        </transition>
+    </div>
 </template>
 <script>
     export default {
         name: 'account',
         computed: {
             animateName () {
-                console.log(1)
                 return this.$store.state.animate_name;
             }
         }
@@ -18,6 +19,13 @@
 </script>
 <style lang="scss">
     @import "../../assets/scss/define";
+    .consumption-wrap,
+    .earn-wrap,
+    .account-wrap{
+        @extend %w100;
+        @extend %h100;
+        @extend %oya;
+    }
     .vux-popup-picker-header-menu-right,
     .dp-right{
         font-size: 16px !important;
@@ -39,7 +47,13 @@
     .input-item{
         height: 50px;
         line-height: 50px;
-        border-bottom: 1px solid #58B7FF;
+        border-bottom: 1px solid #ccc;
+        .vux-cell-box:before {
+            @extend %dn;
+        }
+        &.input-active-item{
+            border-bottom: 1px solid #58B7FF;
+        }
         .weui-cell{
             padding: 0 10px;
         }
@@ -60,6 +74,40 @@
         }
         .week{
             @extend %tac;
+        }
+        .vux-prev-icon, .vux-next-icon{
+            border: 1px solid #58B7FF;
+            border-top: none;
+            border-right: none;
+        }
+        .inline-calendar td.current > span {
+            background-color: #58B7FF;
+        }
+    }
+    .sure-btn{
+        @extend %db;
+        @extend %cp;
+        @extend %f16;
+        @extend %tac;
+        @extend %cfff;
+        margin: 20px 20px 40px;
+        height: 40px;
+        line-height: 40px;
+        border-radius: 5px;
+        background-color: #bbb;
+        box-shadow: 0 3px 0 0 #999;
+        transition: background-color .5s;
+    }
+    .earn-wrap{
+        .sure-btn.sure-active-true{
+            background-color: #69ce72;
+            box-shadow: 0 3px 0 0 #13CE66;
+        }
+    }
+    .consumption-wrap{
+        .sure-btn.sure-active-true{
+            background-color: #FF4949;
+            box-shadow: 0 3px 0 0 red;
         }
     }
 </style>

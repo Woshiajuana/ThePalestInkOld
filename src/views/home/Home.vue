@@ -1,29 +1,126 @@
 <template>
-    <div class="container-view home-wrap">
-        <div class="balance-wrap">
-            <h2 class="balance-title">可用余额</h2>
-            <h1 class="balance-total">6000.00</h1>
-        </div>
-        <div class="go-btn-box">
-            <a href="#/account/consumption" class="go-account go-consumption">消费</a>
-            <a href="#/account/earn" class="go-account go-earn">入账</a>
-        </div>
+    <div class="container-view">
+        <!--<scroller lock-x-->
+                  <!--height="-54"-->
+                  <!--:scrollbarY="true"-->
+                  <!--@on-scroll="onScroll"-->
+                  <!--:use-pulldown="true"-->
+                  <!--:use-pullup="true"-->
+                  <!--@on-pulldown-loading="onPullDownLoading"-->
+                  <!--@on-pullup-loading="onPullUpLoading"-->
+                  <!--:pulldown-config="pull_down_config"-->
+                  <!--:pullup-config="pull_up_config"-->
+                  <!--ref="homeScrollEvent">-->
+            <div class="home-wrap"
+                :class="{'home-active': is_open}">
+                <div class="balance-wrap">
+                    <h2 class="balance-title">可用余额</h2>
+                    <h1 class="balance-total">6000.00</h1>
+                </div>
+                <div class="home-btn-wrap">
+                    <span class="home-btn-item">本月可用余额</span>
+                    <span class="home-btn-item">实施计划经济</span>
+                </div>
+                <svg @click="is_open = true" slot="icon" class="home-arrow" v-show="!is_open">
+                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#nav-arrow"></use>
+                </svg>
+            </div>
+        <!--</scroller>-->
     </div>
 </template>
 <script>
+    import { Scroller } from 'vux'
+    import GestureMobile from '../../assets/lib/GestureMobile'
     export default {
-        name: 'home'
+        name: 'home',
+        data: function () {
+            return {
+                is_open: false,
+                is_loading: true,
+                pull_down_config: {
+                    content: '下拉刷新',
+                    height: 60,
+                    autoRefresh: false,
+                    downContent: '拉人家干嘛~~~',
+                    upContent: '疼~还不松开人家',
+                    loadingContent: 'Loading...',
+                    clsPrefix: 'xs-plugin-pulldown-'
+                },
+                pull_up_config: {
+                    content: '上拉加载',
+                    pullUpHeight: 60,
+                    height: 40,
+                    autoRefresh: false,
+                    downContent: '疼~还不松开人家',
+                    upContent: '拉人家干嘛~~~',
+                    loadingContent: 'Loading...',
+                    clsPrefix: 'xs-plugin-pullup-'
+                }
+            }
+        },
+        components:{
+            Scroller,
+        },
+        created () {
+            this.$nextTick(() => {
+                let _this = this;
+                console.log(this.$el)
+                GestureMobile(this.$el,{
+                    upCallBackFun (distance) {
+                        _this.is_open = true;
+                    },
+                    downCallBackFun (distance) {
+                        _this.is_open = false;
+                    }
+                });
+            })
+        },
+        methods: {
+            onScroll (pos) {
+                this.scrollTop = pos.top;
+            },
+            onPullDownLoading () {
+                /**用户触发下拉刷新状态，监听该事件以获取加载新数据*/
+//                this.$store.dispatch('articleDataInit', () => {
+                        this.$nextTick(() => {
+                            this.$refs.homeScrollEvent.reset();
+                            this.$refs.homeScrollEvent.donePulldown();
+                        });
+//                    }
+//                );
+            },
+            onPullUpLoading () {
+                /**用户触发上拉加载状态，监听该事件以加载新数据*/
+//                this.$store.dispatch('articleDataLoad', () => {
+                        this.$nextTick(() => {
+                            this.$refs.homeScrollEvent.reset();
+                            this.$refs.homeScrollEvent.donePullup();
+                        })
+//                    }
+//                );
+            }
+        },
     }
 </script>
 <style lang="scss">
     @import "../../assets/scss/define";
+    .home-active{
+        .balance-wrap{
+            top: 35%;
+        }
+        .home-btn-wrap{
+            bottom: 15%;
+            opacity: 1;
+        }
+    }
     .balance-wrap{
         @extend %pa;
         @extend %oh;
-        top: 10%;
+        @extend %l50;
+        @extend %t50;
         width: 60%;
-        left: 50%;
-        transform: translate3d(-50%,0,0);
+        transition: all 1s;
+        transform: translate3d(-50%,-50%,0);
         padding-bottom: 60%;
         border-radius: 50%;
         background-color: #fff;
@@ -60,16 +157,18 @@
             color: #999;
         }
     }
-    .go-btn-box{
+    .home-btn-wrap{
         @extend %pa;
-        @extend %tac;
-        @extend %f16;
-        @extend %cfff;
-        @extend %l0;
         @extend %r0;
-        bottom: 25%;
+        @extend %l0;
+        @extend %tac;
+        @extend %f14;
+        @extend %cfff;
+        opacity: 0;
+        transition: all .5s;
+        bottom: -30%;
     }
-    .go-account{
+    .home-btn-item{
         @extend %db;
         @extend %cp;
         @extend %cfff;
@@ -79,13 +178,27 @@
         line-height: 32px;
         background-color: #58B7FF;
         border-radius: 5px;
-        &.go-consumption{
-            background-color: #FF4949;
-            box-shadow: 0 3px 0 0 red;
+        box-shadow: 0 3px 0 0 #1D8CE0;
+    }
+    .home-arrow{
+        @extend %pa;
+        @extend %l50;
+        margin-left: -10px;
+        bottom: 20px;
+        width: 20px;
+        height: 20px;
+        fill: #999;
+        animation: arrow-animate 2s ease-in-out infinite;
+    }
+    @keyframes arrow-animate {
+        0%{
+            bottom: 10px;
         }
-        &.go-earn{
-            background-color: #69ce72;
-            box-shadow: 0 3px 0 0 #13CE66;
+        50%{
+            bottom: 20px;
+        }
+        100%{
+            bottom: 10px;
         }
     }
 </style>
