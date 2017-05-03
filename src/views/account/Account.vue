@@ -44,15 +44,21 @@
     .input-warp{
         padding: 0 10px;
     }
+    .input-required{
+        @extend %pr;
+        &:before{
+            content: '*';
+            @extend %pa;
+            @extend %f16;
+            color: red;
+        }
+    }
     .input-item{
         height: 50px;
         line-height: 50px;
         border-bottom: 1px solid #ccc;
         .vux-cell-box:before {
             @extend %dn;
-        }
-        &.input-active-item{
-            border-bottom: 1px solid #58B7FF;
         }
         .weui-cell{
             padding: 0 10px;
