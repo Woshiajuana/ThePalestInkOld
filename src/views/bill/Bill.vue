@@ -7,19 +7,101 @@
                 <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#filter-icon"></use>
             </svg>
             <div class="filter-menu">
-                <a href="#/" class="filter-menu-item">水果零食</a>
-                <a href="#/" class="filter-menu-item">餐饮伙食</a>
-                <a href="#/" class="filter-menu-item">出行旅游</a>
-                <a href="#/" class="filter-menu-item">出行旅游</a>
-                <a href="#/" class="filter-menu-item">出行旅游</a>
-                <a href="#/" class="filter-menu-item">出行旅游</a>
-                <a href="#/" class="filter-menu-item">出行旅游</a>
-                <a href="#/" class="filter-menu-item">出行旅游</a>
-                <a href="#/" class="filter-menu-item">出行旅游</a>
-                <a href="#/" class="filter-menu-item">出行旅游</a>
-                <a href="#/" class="filter-menu-item">出行旅游</a>
-                <a href="#/" class="filter-menu-item">出行旅游</a>
-                <a href="#/" class="filter-menu-item">出行旅游</a>
+                <h2 class="header-title">筛选：</h2>
+                <ul class="input-warp">
+                    <li class="input-item">
+                        <datetime
+                            title="年："
+                            v-model="year_value"
+                            format="YYYY"
+                            confirm-text="完成"
+                            cancel-text="取消"
+                            @on-change="change">
+                        </datetime>
+                    </li>
+                    <li class="input-item">
+                        <datetime
+                            title="月："
+                            v-model="month_value"
+                            format="MM"
+                            confirm-text="完成"
+                            cancel-text="取消"
+                            @on-change="change">
+                        </datetime>
+                    </li>
+                    <li class="input-item">
+                        <datetime
+                            title="日："
+                            v-model="day_value"
+                            format="DD"
+                            confirm-text="完成"
+                            cancel-text="取消"
+                            @on-change="change">
+                        </datetime>
+                    </li>
+                </ul>
+                <div class="menu-type-wrap">
+                    <checker
+                        v-model="demo1Checkbox"
+                        type="checkbox"
+                        default-item-class="bill-type-check-item"
+                        selected-item-class="bill-type-check-item-selected">
+                        <checker-item :value="1">
+                            <svg class="checker-item-icon">
+                                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#type-sgls"></use>
+                            </svg>
+                        </checker-item>
+                        <checker-item :value="2">
+                            <svg class="checker-item-icon">
+                                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#type-cyhs"></use>
+                            </svg>
+                        </checker-item>
+                        <checker-item :value="3">
+                            <svg class="checker-item-icon">
+                                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#type-cxly"></use>
+                            </svg>
+                        </checker-item>
+                        <checker-item :value="4">
+                            <svg class="checker-item-icon">
+                                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#type-wsgw"></use>
+                            </svg>
+                        </checker-item>
+                        <checker-item :value="5">
+                            <svg class="checker-item-icon">
+                                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#type-shrc"></use>
+                            </svg>
+                        </checker-item>
+                        <checker-item :value="6">
+                            <svg class="checker-item-icon">
+                                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#type-cfsd"></use>
+                            </svg>
+                        </checker-item>
+                        <checker-item :value="7">
+                            <svg class="checker-item-icon">
+                                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#type-ylyw"></use>
+                            </svg>
+                        </checker-item>
+                        <checker-item :value="8">
+                            <svg class="checker-item-icon">
+                                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#type-jbgz"></use>
+                            </svg>
+                        </checker-item>
+                        <checker-item :value="9">
+                            <svg class="checker-item-icon">
+                                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#type-gsfl"></use>
+                            </svg>
+                        </checker-item>
+                        <checker-item :value="10">
+                            <svg class="checker-item-icon">
+                                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#type-qt"></use>
+                            </svg>
+                        </checker-item>
+                    </checker>
+                </div>
+                <div class="menu-btn-wrap">
+                    <i class="menu-btn menu-sure-btn">确定</i>
+                    <i class="menu-btn menu-reset-btn">重置</i>
+                </div>
             </div>
             <div class="bill-wrap">
                 <scroller lock-x
@@ -49,7 +131,7 @@
                         <li class="bill-item">
                         <span class="bill-item-type earn-type">
                             <svg slot="icon" class="bill-item-type-icon">
-                                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#type-cshs"></use>
+                                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#type-cyhs"></use>
                             </svg>
                         </span>
                             <p class="bill-item-con">
@@ -162,14 +244,20 @@
     </div>
 </template>
 <script>
-    import { Calendar, Scroller } from 'vux'
+    import { Scroller, Datetime , Checker, CheckerItem } from 'vux'
+    import GestureMobile from '../../assets/lib/GestureMobile'
+    import Tool from '../../assets/lib/Tool'
     import types from '../../store/mutation-types'
     export default {
         name: 'bill',
         data () {
             return {
+                demo1Checkbox: [2, 1],
+                is_btn_active: false,
+                day_value: Tool.format('dd'),
+                month_value: Tool.format('MM'),
+                year_value: Tool.format('yyyy'),
                 is_open_menu: false,
-                date_value: '',
                 pull_down_config: {
                     content: '下拉刷新',
                     height: 60,
@@ -193,12 +281,41 @@
         },
         created () {
             this.$store.commit(types.SET_NAV_INDEX,'3');
+            this.gestureMobile();
         },
         components: {
-            Calendar,
-            Scroller
+            Scroller,
+            Datetime,
+            Checker,
+            CheckerItem
         },
         methods: {
+            /**手势判断*/
+            gestureMobile () {
+                this.$nextTick(() => {
+                    let _this = this;
+                    GestureMobile(this.$el,{
+                        leftCallBackFun () {
+                            _this.is_open_menu = true;
+                        },
+                        rightCallBackFun () {
+                            _this.is_open_menu = false;
+                        }
+                    });
+                })
+            },
+            change (value) {
+                console.log('change', value)
+            },
+            onShow () {
+                console.log('on show')
+            },
+            onHide (type) {
+                console.log('on hide', type)
+            },
+            onChange (val) {
+                console.log('val change', val)
+            },
             onScroll (pos) {
                 this.scrollTop = pos.top;
             },
@@ -219,6 +336,26 @@
 </script>
 <style lang="scss">
     @import "../../assets/scss/define";
+    .bill-type-check-item{
+        @extend %pr;
+        @extend %fl;
+        width: 20%;
+        padding-bottom: 20%;
+        &.bill-type-check-item-selected{
+            .checker-item-icon{
+                fill: #58B7FF;
+            }
+        }
+    }
+    .checker-item-icon{
+        @extend %pa;
+        top: 20%;
+        left: 20%;
+        width: 60%;
+        height: 60%;
+        fill: #ccc;
+        transition: all .5s;
+    }
     .bill-wrap{
         @extend %oya;
         @extend %pa;
@@ -235,18 +372,11 @@
         height: 20px;
         fill: #999;
     }
-    .filter-menu-item{
-        @extend %db;
-        @extend %f12;
-        @extend %cp;
-        padding-left: 10px;
-        line-height: 30px;
-    }
     .container-box{
         @extend %h100;
         transition: all .5s;
         &.open-menu{
-            transform: translate3d(-80%,0,0);
+            transform: translate3d(-82%,0,0);
         }
     }
     .filter-menu{
@@ -256,10 +386,51 @@
         @extend %b0;
         transition: all .5s;
         transform: translate3d(100%,0,0);
-        width: 90%;
+        width: 82%;
         z-index: 1;
-        border-left: 1px solid #ddd;
         background-color: #fff;
+        &:before{
+            content: " ";
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background-color: #999;
+            -webkit-transform-origin: 0 0;
+            transform-origin: 0 0;
+            -webkit-transform: scaleX(0.5);
+            transform: scaleX(0.5);
+        }
+    }
+    .filter-menu-item{
+        @extend %db;
+        @extend %f12;
+        @extend %cp;
+        padding-left: 10px;
+        line-height: 30px;
+    }
+    .menu-btn-wrap{
+        @extend %pa;
+        @extend %df;
+        bottom: 0;
+        left: 0;
+        right: 0;
+    }
+    .menu-btn{
+        @extend %df1;
+        @extend %f14;
+        @extend %tac;
+        @extend %cfff;
+        @extend %cp;
+        height: 40px;
+        line-height: 40px;
+    }
+    .menu-sure-btn{
+        background-color: #58B7FF;
+    }
+    .menu-reset-btn{
+        background-color: #ccc;
     }
     .bill-list{
         margin: 0 10px 20px;
