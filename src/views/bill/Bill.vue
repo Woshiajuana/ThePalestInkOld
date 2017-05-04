@@ -117,23 +117,24 @@
                           ref="homeScrollEvent">
                     <ul class="bill-list">
                         <li class="bill-item">
-                        <span class="bill-item-type consumption-type">
-                            <svg slot="icon" class="bill-item-type-icon">
-                                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#type-sgls"></use>
-                            </svg>
-                        </span>
+                            <span class="bill-item-type consumption-type">
+                                <svg class="bill-item-type-icon">
+                                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#type-sgls"></use>
+                                </svg>
+                            </span>
                             <p class="bill-item-con">
                                 <span class="bill-item-remark">水果零食</span>
                                 <span class="bill-item-sum">50.00</span>
                             </p>
                             <p class="bill-item-time">消费时间：2017-05-03 17：18</p>
+                            <i class="bill-cancel">取消</i>
                         </li>
                         <li class="bill-item">
-                        <span class="bill-item-type earn-type">
-                            <svg slot="icon" class="bill-item-type-icon">
-                                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#type-cyhs"></use>
-                            </svg>
-                        </span>
+                            <span class="bill-item-type earn-type">
+                                <svg class="bill-item-type-icon">
+                                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#type-cyhs"></use>
+                                </svg>
+                            </span>
                             <p class="bill-item-con">
                                 <span class="bill-item-remark">餐饮伙食</span>
                                 <span class="bill-item-sum">50.00</span>
@@ -141,11 +142,11 @@
                             <p class="bill-item-time">消费时间：2017-05-03 17：18</p>
                         </li>
                         <li class="bill-item">
-                        <span class="bill-item-type earn-type">
-                            <svg slot="icon" class="bill-item-type-icon">
-                                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#type-wsgw"></use>
-                            </svg>
-                        </span>
+                            <span class="bill-item-type earn-type">
+                                <svg class="bill-item-type-icon">
+                                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#type-wsgw"></use>
+                                </svg>
+                            </span>
                             <p class="bill-item-con">
                                 <span class="bill-item-remark">网上购物</span>
                                 <span class="bill-item-sum">50.00</span>
@@ -153,11 +154,11 @@
                             <p class="bill-item-time">消费时间：2017-05-03 17：18</p>
                         </li>
                         <li class="bill-item">
-                        <span class="bill-item-type earn-type">
-                            <svg slot="icon" class="bill-item-type-icon">
-                                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#type-shrc"></use>
-                            </svg>
-                        </span>
+                            <span class="bill-item-type earn-type">
+                                <svg class="bill-item-type-icon">
+                                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#type-shrc"></use>
+                                </svg>
+                            </span>
                             <p class="bill-item-con">
                                 <span class="bill-item-remark">生活日常</span>
                                 <span class="bill-item-sum">50.00</span>
@@ -165,11 +166,11 @@
                             <p class="bill-item-time">消费时间：2017-05-03 17：18</p>
                         </li>
                         <li class="bill-item">
-                        <span class="bill-item-type earn-type">
-                            <svg slot="icon" class="bill-item-type-icon">
-                                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#type-cfsd"></use>
-                            </svg>
-                        </span>
+                            <span class="bill-item-type earn-type">
+                                <svg class="bill-item-type-icon">
+                                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#type-cfsd"></use>
+                                </svg>
+                            </span>
                             <p class="bill-item-con">
                                 <span class="bill-item-remark">租房水电</span>
                                 <span class="bill-item-sum">50.00</span>
@@ -177,11 +178,11 @@
                             <p class="bill-item-time">消费时间：2017-05-03 17：18</p>
                         </li>
                         <li class="bill-item">
-                        <span class="bill-item-type earn-type">
-                            <svg slot="icon" class="bill-item-type-icon">
-                                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#type-ylyw"></use>
-                            </svg>
-                        </span>
+                            <span class="bill-item-type earn-type">
+                                <svg class="bill-item-type-icon">
+                                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#type-ylyw"></use>
+                                </svg>
+                            </span>
                             <p class="bill-item-con">
                                 <span class="bill-item-remark">医疗药物</span>
                                 <span class="bill-item-sum">50.00</span>
@@ -189,11 +190,11 @@
                             <p class="bill-item-time">消费时间：2017-05-03 17：18</p>
                         </li>
                         <li class="bill-item">
-                        <span class="bill-item-type earn-type">
-                            <svg slot="icon" class="bill-item-type-icon">
-                                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#type-qt"></use>
-                            </svg>
-                        </span>
+                            <span class="bill-item-type earn-type">
+                                <svg class="bill-item-type-icon">
+                                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#type-qt"></use>
+                                </svg>
+                            </span>
                             <p class="bill-item-con">
                                 <span class="bill-item-remark">其它消费</span>
                                 <span class="bill-item-sum">50.00</span>
@@ -202,11 +203,11 @@
                         </li>
 
                         <li class="bill-item">
-                        <span class="bill-item-type earn-type">
-                            <svg slot="icon" class="bill-item-type-icon">
-                                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#type-jbgz"></use>
-                            </svg>
-                        </span>
+                            <span class="bill-item-type earn-type">
+                                <svg class="bill-item-type-icon">
+                                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#type-jbgz"></use>
+                                </svg>
+                            </span>
                             <p class="bill-item-con">
                                 <span class="bill-item-remark">基本工资</span>
                                 <span class="bill-item-sum">50.00</span>
@@ -214,11 +215,11 @@
                             <p class="bill-item-time">入账时间：2017-05-03 17：18</p>
                         </li>
                         <li class="bill-item">
-                        <span class="bill-item-type earn-type">
-                            <svg slot="icon" class="bill-item-type-icon">
-                                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#type-gsfl"></use>
-                            </svg>
-                        </span>
+                            <span class="bill-item-type earn-type">
+                                <svg class="bill-item-type-icon">
+                                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#type-gsfl"></use>
+                                </svg>
+                            </span>
                             <p class="bill-item-con">
                                 <span class="bill-item-remark">公司福利</span>
                                 <span class="bill-item-sum">50.00</span>
@@ -226,11 +227,11 @@
                             <p class="bill-item-time">入账时间：2017-05-03 17：18</p>
                         </li>
                         <li class="bill-item">
-                        <span class="bill-item-type earn-type">
-                            <svg slot="icon" class="bill-item-type-icon">
-                                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#type-qt"></use>
-                            </svg>
-                        </span>
+                            <span class="bill-item-type earn-type">
+                                <svg class="bill-item-type-icon">
+                                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#type-qt"></use>
+                                </svg>
+                            </span>
                             <p class="bill-item-con">
                                 <span class="bill-item-remark">其它入账</span>
                                 <span class="bill-item-sum">50.00</span>
@@ -239,6 +240,22 @@
                         </li>
                     </ul>
                 </scroller>
+            </div>
+            <div class="bill-prompt-wrap">
+                <div class="bill-prompt">
+                    <span class="bill-sum-title">入账</span>
+                    <span class="bill-sum bill-sum-earn">5000.00</span>
+                </div>
+                <i class="bill-reduce"></i>
+                <div class="bill-prompt">
+                    <span class="bill-sum-title">消费</span>
+                    <span class="bill-sum bill-sum-consumption">5000.00</span>
+                </div>
+                <i class="bill-equal"></i>
+                <div class="bill-prompt">
+                    <span class="bill-sum-title">余额</span>
+                    <span class="bill-sum bill-sum-balance">5000.00</span>
+                </div>
             </div>
         </div>
     </div>
@@ -336,6 +353,71 @@
 </script>
 <style lang="scss">
     @import "../../assets/scss/define";
+    .bill-reduce,
+    .bill-equal{
+        width: 12px;
+        margin: 0 4px;
+    }
+    .bill-sum-title{
+        @extend %pa;
+        @extend %f12;
+        @extend %tac;
+        @extend %r0;
+        @extend %l0;
+        top: 3px;
+        color: #58B7FF;
+    }
+    .bill-sum-earn{
+        color: #F7BA2A;
+    }
+    .bill-sum-consumption{
+        color: #FF4949;
+    }
+    .bill-sum-balance{
+        color: #13CE66;
+    }
+    .bill-reduce{
+        height: 2px;
+        margin-top: 22px;
+        background-color: #58B7FF;
+    }
+    .bill-equal{
+        height: 6px;
+        margin-top: 18px;
+        border-bottom: 2px solid #58B7FF;
+        border-top: 2px solid #58B7FF;
+    }
+    .bill-prompt-wrap{
+        @extend %pa;
+        @extend %b0;
+        @extend %r0;
+        @extend %l0;
+        @extend %df;
+        height: 40px;
+        background-color: rgba(255,255,255,.8);
+    }
+    .bill-sum{
+        @extend %fwb;
+        line-height: 35px;
+    }
+    .bill-prompt{
+        @extend %df1;
+        @extend %f16;
+        @extend %tac;
+        @extend %pr;
+        padding-top: 10px;
+    }
+    .bill-cancel{
+        @extend %pa;
+        @extend %f12;
+        @extend %cfff;
+        @extend %cp;
+        padding: 0 5px;
+        right: 10px;
+        bottom: 12px;
+        background-color: #FF4949;
+        border-radius: 5px;
+    }
     .bill-type-check-item{
         @extend %pr;
         @extend %fl;
@@ -492,6 +574,7 @@
         @extend %tar;
         @extend %f12;
         @extend %c9;
+        margin-right: 40px;
         height: 20px;
         line-height: 20px;
     }
