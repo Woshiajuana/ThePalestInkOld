@@ -1,11 +1,13 @@
 <template>
     <div class="container-view">
+        <!--主体内容-->
         <div class="container-box"
             :class="{'open-menu': is_open_menu}">
             <h1 class="header-title">账单：</h1>
-            <svg @click="is_open_menu=!is_open_menu" slot="icon" class="bill-filter">
+            <svg @click="is_open_menu = !is_open_menu" class="bill-filter">
                 <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#filter-icon"></use>
             </svg>
+            <!--过滤信息菜单-->
             <div class="filter-menu">
                 <h2 class="header-title">筛选：</h2>
                 <ul class="input-warp">
@@ -42,7 +44,7 @@
                 </ul>
                 <div class="menu-type-wrap">
                     <checker
-                        v-model="demo1Checkbox"
+                        v-model="check_value_arr"
                         type="checkbox"
                         default-item-class="bill-type-check-item"
                         selected-item-class="bill-type-check-item-selected">
@@ -103,6 +105,8 @@
                     <i class="menu-btn menu-reset-btn">重置</i>
                 </div>
             </div>
+            <!--/过滤信息菜单-->
+            <!--账单信息-->
             <div class="bill-wrap">
                 <scroller lock-x
                           height="-118"
@@ -127,7 +131,7 @@
                                 <span class="bill-item-sum">50.00</span>
                             </p>
                             <p class="bill-item-time">消费时间：2017-05-03 17：18</p>
-                            <i class="bill-cancel">取消</i>
+                            <i class="bill-cancel" @click="show_dialog = true">取消</i>
                         </li>
                         <li class="bill-item">
                             <span class="bill-item-type earn-type">
@@ -241,6 +245,8 @@
                     </ul>
                 </scroller>
             </div>
+            <!--/账单信息-->
+            <!--账单信息提示-->
             <div class="bill-prompt-wrap">
                 <div class="bill-prompt">
                     <span class="bill-sum-title">入账</span>
@@ -257,11 +263,33 @@
                     <span class="bill-sum bill-sum-balance">5000.00</span>
                 </div>
             </div>
+            <!--/账单信息提示-->
         </div>
+        <!--/主体内容-->
+        <!--弹窗提示-->
+        <x-dialog v-model="show_dialog" class="dialog-demo" hide-on-blur>
+            <div class="img-box">
+                xxxxxxx<br>
+                xxxxxxx<br>
+                xxxxxxx<br>
+                xxxxxxx<br>
+                xxxxxxx<br>
+                xxxxxxx<br>
+                xxxxxxx<br>
+                xxxxxxx<br>
+                xxxxxxx<br>
+                xxxxxxx<br>
+                xxxxxxx<br>
+            </div>
+            <div class="bill-dialog-box" @click="show_dialog=false">
+                <span class="bill-dialog-close"></span>
+            </div>
+        </x-dialog>
+        <!--/弹窗提示-->
     </div>
 </template>
 <script>
-    import { Scroller, Datetime , Checker, CheckerItem } from 'vux'
+    import { Scroller, Datetime , Checker, CheckerItem ,XDialog } from 'vux'
     import GestureMobile from '../../assets/lib/GestureMobile'
     import Tool from '../../assets/lib/Tool'
     import types from '../../store/mutation-types'
@@ -269,7 +297,8 @@
         name: 'bill',
         data () {
             return {
-                demo1Checkbox: [2, 1],
+                show_dialog: false,
+                check_value_arr: [2, 1],
                 is_btn_active: false,
                 day_value: Tool.format('dd'),
                 month_value: Tool.format('MM'),
@@ -304,7 +333,8 @@
             Scroller,
             Datetime,
             Checker,
-            CheckerItem
+            CheckerItem,
+            XDialog
         },
         methods: {
             /**手势判断*/
@@ -353,6 +383,35 @@
 </script>
 <style lang="scss">
     @import "../../assets/scss/define";
+    .bill-dialog-box{
+        background-color: #F9FAFC;
+    }
+    .bill-dialog-close{
+        @extend %pr;
+        @extend %dib;
+        @extend %vam;
+        @extend %c9;
+        margin-top: 8px;
+        margin-bottom: 8px;
+        width: 24px;
+        height: 24px;
+        &:after,
+        &:before{
+            content: '';
+            @extend %pa;
+            @extend %l0;
+            top: 11px;
+            width: 24px;
+            height: 1px;
+            background-color: #58B7FF;
+            -webkit-transform: rotate(-45deg);
+            transform: rotate(-45deg);
+        }
+        &:after{
+            -webkit-transform: rotate(45deg);
+            transform: rotate(45deg);
+        }
+    }
     .bill-reduce,
     .bill-equal{
         width: 12px;
