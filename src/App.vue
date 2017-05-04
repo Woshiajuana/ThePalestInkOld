@@ -68,6 +68,7 @@
     @import "./assets/scss/reset";
     @import "./assets/scss/define";
     body{
+        @extend %oh;
         background-color: #F9FAFC;
     }
     .home-wrap,
@@ -146,5 +147,9 @@
         opacity: 0;
         -webkit-transform: translate3d(-100%,0,0);
         transform: translate3d(-100%,0,0)
+    }
+    .weui-toast__content{
+        font-size: 12px !important;
+        padding: 10px 5px !important;
     }
 </style>

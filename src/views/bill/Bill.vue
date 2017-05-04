@@ -101,7 +101,7 @@
                     </checker>
                 </div>
                 <div class="menu-btn-wrap">
-                    <i class="menu-btn menu-sure-btn">确定</i>
+                    <i class="menu-btn menu-sure-btn" @click="filterBill()">确定</i>
                     <i class="menu-btn menu-reset-btn">重置</i>
                 </div>
             </div>
@@ -281,8 +281,9 @@
                 xxxxxxx<br>
                 xxxxxxx<br>
             </div>
+            <span class="bill-dialog-close"  @click="show_dialog = false"></span>
             <div class="bill-dialog-box" @click="show_dialog=false">
-                <span class="bill-dialog-close"></span>
+                <span class="bill-dialog-ok"></span>
             </div>
         </x-dialog>
         <!--/弹窗提示-->
@@ -337,6 +338,13 @@
             XDialog
         },
         methods: {
+            /**过滤账单*/
+            filterBill () {
+                this.$vux.toast.show({
+                    type: 'text',
+                    text: '请至少填写一样筛选信息'
+                })
+            },
             /**手势判断*/
             gestureMobile () {
                 this.$nextTick(() => {
@@ -387,12 +395,34 @@
         background-color: #F9FAFC;
     }
     .bill-dialog-close{
+        @extend %pa;
+        top: 8px;
+        right: 8px;
+        width: 15px;
+        height: 15px;
+        &:after,
+        &:before{
+            content: '';
+            @extend %pa;
+            @extend %l0;
+            top: 7px;
+            width: 15px;
+            height: 1px;
+            background-color: #999;
+            -webkit-transform: rotate(-45deg);
+            transform: rotate(-45deg);
+        }
+        &:after{
+            -webkit-transform: rotate(45deg);
+            transform: rotate(45deg);
+        }
+    }
+    .bill-dialog-ok{
         @extend %pr;
         @extend %dib;
         @extend %vam;
         @extend %c9;
-        margin-top: 8px;
-        margin-bottom: 8px;
+        margin: 8px 0;
         width: 24px;
         height: 24px;
         &:after,
@@ -400,16 +430,23 @@
             content: '';
             @extend %pa;
             @extend %l0;
-            top: 11px;
-            width: 24px;
+            top: 7px;
             height: 1px;
             background-color: #58B7FF;
             -webkit-transform: rotate(-45deg);
             transform: rotate(-45deg);
         }
         &:after{
+            left: -5px;
+            top: 13px;
+            width: 13px;
             -webkit-transform: rotate(45deg);
             transform: rotate(45deg);
+        }
+        &:before{
+            width: 24px;
+            top: 9px;
+            left: 2px;
         }
     }
     .bill-reduce,

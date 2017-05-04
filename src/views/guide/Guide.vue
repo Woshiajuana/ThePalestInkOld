@@ -35,10 +35,10 @@
             return {
                 guide_active_index: 1,
                 guide_arr: [
-                    { img_url: '../../../static/img/guide_1.jpg' },
-                    { img_url: '../../../static/img/guide_2.jpg' },
-                    { img_url: '../../../static/img/guide_3.jpg' },
-                    { img_url: '../../../static/img/guide_4.jpg' }
+                    { img_url: 'http://www.owulia.com/ink/static/img/guide_1.jpg' },
+                    { img_url: 'http://www.owulia.com/ink/static/img/guide_2.jpg' },
+                    { img_url: 'http://www.owulia.com/ink/static/img/guide_3.jpg' },
+                    { img_url: 'http://www.owulia.com/ink/static/img/guide_4.jpg' }
                 ]
             }
         },
