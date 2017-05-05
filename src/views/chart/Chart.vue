@@ -2,20 +2,29 @@
     <div class="container-view">
         <h1 class="header-title">分析：</h1>
         <div class="chart-wrap">
-            <div class="chart-item">
-                <h2 class="chart-title">消费状况：</h2>
-                <canvas id="consumption-chart" width="400" height="400"></canvas>
-            </div>
-            <div class="chart-item">
-                <h2 class="chart-title">入账状况：</h2>
-                <canvas id="earn-chart" width="400" height="400"></canvas>
-            </div>
+            <scroller lock-x
+                      height="-118"
+                      :scrollbarY="true"
+                      @on-scroll="onScroll"
+                      ref="chartScrollEvent">
+                <div class="chart-con">
+                    <div class="chart-item">
+                        <h2 class="chart-title">消费状况：</h2>
+                        <canvas id="consumption-chart" width="400" height="400"></canvas>
+                    </div>
+                    <div class="chart-item">
+                        <h2 class="chart-title">入账状况：</h2>
+                        <canvas id="earn-chart" width="400" height="400"></canvas>
+                    </div>
+                </div>
+            </scroller>
         </div>
     </div>
 </template>
 <script>
     import types from '../../store/mutation-types'
     import Util from '../../assets/lib/Util'
+    import { Scroller } from 'vux'
     export default {
         name: 'chart',
         data () {
@@ -23,6 +32,9 @@
                 consumption_chart_arr: [0,0,0,0,0,0,0,0],
                 earn_chart_arr: [0,0,0]
             }
+        },
+        components: {
+            Scroller
         },
         created () {
             this.$store.commit(types.SET_NAV_INDEX,'4');
@@ -81,6 +93,9 @@
             })
         },
         methods: {
+            onScroll (pos) {
+                this.scrollTop = pos.top;
+            },
             fetchBillData () {
                 var bill_arr = Util.Bill.query();
                 bill_arr.forEach((item,index) =>{

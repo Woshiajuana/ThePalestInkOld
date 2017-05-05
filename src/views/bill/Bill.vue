@@ -125,7 +125,7 @@
                           height="-118"
                           :scrollbarY="true"
                           @on-scroll="onScroll"
-                          ref="homeScrollEvent">
+                          ref="billScrollEvent">
                     <ul class="bill-list">
                         <li class="bill-item" v-for="(bill_item,bill_index) in bill_arr">
                             <span class="bill-item-type"
@@ -292,7 +292,7 @@
             fetchBillArr (query_condition) {
                 this.bill_arr = Util.Bill.query(query_condition);
                 this.$nextTick(() => {
-                    this.$refs.homeScrollEvent.reset();
+                    this.$refs.billScrollEvent.reset();
                 });
             },
             /**提示信息*/
@@ -341,14 +341,14 @@
             },
             onPullDownLoading () {
                 this.$nextTick(() => {
-                    this.$refs.homeScrollEvent.reset();
-                    this.$refs.homeScrollEvent.donePulldown();
+                    this.$refs.billScrollEvent.reset();
+                    this.$refs.billScrollEvent.donePulldown();
                 });
             },
             onPullUpLoading () {
                 this.$nextTick(() => {
-                    this.$refs.homeScrollEvent.reset();
-                    this.$refs.homeScrollEvent.donePullup();
+                    this.$refs.billScrollEvent.reset();
+                    this.$refs.billScrollEvent.donePullup();
                 })
             }
         }
