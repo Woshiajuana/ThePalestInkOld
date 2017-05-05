@@ -9,7 +9,7 @@ const Tool = function (win) {
     Tool.dataToSessionStorageOperate = {
         /**存储*/
         save: function (data_name,data_value) {
-            if(data_name && data_value)
+            if(typeof data_name != 'undefined' && typeof data_value != 'undefined')
                 sessionStorage.setItem(data_name,JSON.stringify(data_value));
         },
         /**取出*/
@@ -34,7 +34,7 @@ const Tool = function (win) {
     Tool.dataToLocalStorageOperate = {
         /**存储*/
         save: function (data_name,data_value) {
-            if(data_name && data_value)
+            if(typeof data_name != 'undefined' && typeof data_value != 'undefined')
                 localStorage.setItem(data_name,JSON.stringify(data_value));
         },
         /**取出*/

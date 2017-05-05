@@ -120,127 +120,20 @@
                           :pullup-config="pull_up_config"
                           ref="homeScrollEvent">
                     <ul class="bill-list">
-                        <li class="bill-item">
-                            <span class="bill-item-type consumption-type">
+                        <li class="bill-item" v-for="(bill_item,bill_index) in bill_arr">
+                            <span class="bill-item-type"
+                                :class="{'earn-type': bill_item.consumption_or_earn == 1,
+                                 'consumption-type': bill_item.consumption_or_earn == 0}">
                                 <svg class="bill-item-type-icon">
-                                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#type-sgls"></use>
+                                    <use xmlns:xlink="http://www.w3.org/1999/xlink" :xlink:href="'#type-'+ bill_item.billTypeNumber"></use>
                                 </svg>
                             </span>
                             <p class="bill-item-con">
-                                <span class="bill-item-remark">水果零食</span>
-                                <span class="bill-item-sum">50.00</span>
+                                <span class="bill-item-remark" v-text="bill_item.remarks_value || bill_item.account_type[0]"></span>
+                                <span class="bill-item-sum" v-text="bill_item.sum_value"></span>
                             </p>
-                            <p class="bill-item-time">消费时间：2017-05-03 17：18</p>
-                            <i class="bill-cancel" @click="show_dialog = true">取消</i>
-                        </li>
-                        <li class="bill-item">
-                            <span class="bill-item-type earn-type">
-                                <svg class="bill-item-type-icon">
-                                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#type-cyhs"></use>
-                                </svg>
-                            </span>
-                            <p class="bill-item-con">
-                                <span class="bill-item-remark">餐饮伙食</span>
-                                <span class="bill-item-sum">50.00</span>
-                            </p>
-                            <p class="bill-item-time">消费时间：2017-05-03 17：18</p>
-                        </li>
-                        <li class="bill-item">
-                            <span class="bill-item-type earn-type">
-                                <svg class="bill-item-type-icon">
-                                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#type-wsgw"></use>
-                                </svg>
-                            </span>
-                            <p class="bill-item-con">
-                                <span class="bill-item-remark">网上购物</span>
-                                <span class="bill-item-sum">50.00</span>
-                            </p>
-                            <p class="bill-item-time">消费时间：2017-05-03 17：18</p>
-                        </li>
-                        <li class="bill-item">
-                            <span class="bill-item-type earn-type">
-                                <svg class="bill-item-type-icon">
-                                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#type-shrc"></use>
-                                </svg>
-                            </span>
-                            <p class="bill-item-con">
-                                <span class="bill-item-remark">生活日常</span>
-                                <span class="bill-item-sum">50.00</span>
-                            </p>
-                            <p class="bill-item-time">消费时间：2017-05-03 17：18</p>
-                        </li>
-                        <li class="bill-item">
-                            <span class="bill-item-type earn-type">
-                                <svg class="bill-item-type-icon">
-                                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#type-cfsd"></use>
-                                </svg>
-                            </span>
-                            <p class="bill-item-con">
-                                <span class="bill-item-remark">租房水电</span>
-                                <span class="bill-item-sum">50.00</span>
-                            </p>
-                            <p class="bill-item-time">消费时间：2017-05-03 17：18</p>
-                        </li>
-                        <li class="bill-item">
-                            <span class="bill-item-type earn-type">
-                                <svg class="bill-item-type-icon">
-                                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#type-ylyw"></use>
-                                </svg>
-                            </span>
-                            <p class="bill-item-con">
-                                <span class="bill-item-remark">医疗药物</span>
-                                <span class="bill-item-sum">50.00</span>
-                            </p>
-                            <p class="bill-item-time">消费时间：2017-05-03 17：18</p>
-                        </li>
-                        <li class="bill-item">
-                            <span class="bill-item-type earn-type">
-                                <svg class="bill-item-type-icon">
-                                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#type-qt"></use>
-                                </svg>
-                            </span>
-                            <p class="bill-item-con">
-                                <span class="bill-item-remark">其它消费</span>
-                                <span class="bill-item-sum">50.00</span>
-                            </p>
-                            <p class="bill-item-time">消费时间：2017-05-03 17：18</p>
-                        </li>
-
-                        <li class="bill-item">
-                            <span class="bill-item-type earn-type">
-                                <svg class="bill-item-type-icon">
-                                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#type-jbgz"></use>
-                                </svg>
-                            </span>
-                            <p class="bill-item-con">
-                                <span class="bill-item-remark">基本工资</span>
-                                <span class="bill-item-sum">50.00</span>
-                            </p>
-                            <p class="bill-item-time">入账时间：2017-05-03 17：18</p>
-                        </li>
-                        <li class="bill-item">
-                            <span class="bill-item-type earn-type">
-                                <svg class="bill-item-type-icon">
-                                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#type-gsfl"></use>
-                                </svg>
-                            </span>
-                            <p class="bill-item-con">
-                                <span class="bill-item-remark">公司福利</span>
-                                <span class="bill-item-sum">50.00</span>
-                            </p>
-                            <p class="bill-item-time">入账时间：2017-05-03 17：18</p>
-                        </li>
-                        <li class="bill-item">
-                            <span class="bill-item-type earn-type">
-                                <svg class="bill-item-type-icon">
-                                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#type-qt"></use>
-                                </svg>
-                            </span>
-                            <p class="bill-item-con">
-                                <span class="bill-item-remark">其它入账</span>
-                                <span class="bill-item-sum">50.00</span>
-                            </p>
-                            <p class="bill-item-time">入账时间：2017-05-03 17：18</p>
+                            <p class="bill-item-time">{{bill_item.consumption_or_earn == 1 ? '入账' : '消费'}}时间：{{bill_item.date_value}} {{bill_item.time_value}}</p>
+                            <i class="bill-cancel" @click="removeBill(bill_item)">取消</i>
                         </li>
                     </ul>
                 </scroller>
@@ -249,18 +142,18 @@
             <!--账单信息提示-->
             <div class="bill-prompt-wrap">
                 <div class="bill-prompt">
-                    <span class="bill-sum-title">入账</span>
-                    <span class="bill-sum bill-sum-earn">5000.00</span>
+                    <span class="bill-sum-title" @click="fetchBillArr()">入账</span>
+                    <span class="bill-sum bill-sum-earn" id="earn-sum"></span>
                 </div>
                 <i class="bill-reduce"></i>
                 <div class="bill-prompt">
                     <span class="bill-sum-title">消费</span>
-                    <span class="bill-sum bill-sum-consumption">5000.00</span>
+                    <span class="bill-sum bill-sum-consumption" id="consumption-sum"></span>
                 </div>
                 <i class="bill-equal"></i>
                 <div class="bill-prompt">
                     <span class="bill-sum-title">余额</span>
-                    <span class="bill-sum bill-sum-balance">5000.00</span>
+                    <span class="bill-sum bill-sum-balance" id="balance-sum"></span>
                 </div>
             </div>
             <!--/账单信息提示-->
@@ -292,14 +185,19 @@
 <script>
     import { Scroller, Datetime , Checker, CheckerItem ,XDialog } from 'vux'
     import GestureMobile from '../../assets/lib/GestureMobile'
+    import Util from '../../assets/lib/Util'
+    import CountUp from '../../assets/lib/countUp'
     import Tool from '../../assets/lib/Tool'
     import types from '../../store/mutation-types'
     export default {
         name: 'bill',
         data () {
             return {
+                earn_sum: 0,
+                consumption_sum: 0,
+                bill_arr: [],
                 show_dialog: false,
-                check_value_arr: [2, 1],
+                check_value_arr: '',
                 is_btn_active: false,
                 day_value: Tool.format('dd'),
                 month_value: Tool.format('MM'),
@@ -327,8 +225,14 @@
             }
         },
         created () {
+            /**设置导航条状态*/
             this.$store.commit(types.SET_NAV_INDEX,'3');
+            /**手势判断*/
             this.gestureMobile();
+            /**获取账单列表*/
+            this.fetchBillArr();
+            /**提示信息*/
+            this.countSum();
         },
         components: {
             Scroller,
@@ -338,11 +242,34 @@
             XDialog
         },
         methods: {
+            /**删除账单信息*/
+            removeBill (bill) {
+                Util.Bill.remove(bill);
+                this.fetchBillArr();
+                var earn_sum = this.earn_sum,
+                    consumption_sum = this.consumption_sum;
+                if (bill.consumption_or_earn == 0){
+                    this.consumption_sum = this.consumption_sum - bill.sum_value;
+                } else {
+                    this.earn_sum = this.earn_sum - bill.sum_value;
+                }
+                this.$nextTick(() => {
+                    new CountUp("earn-sum", earn_sum, this.earn_sum, 2, 2).start();
+                    new CountUp("consumption-sum", consumption_sum, this.consumption_sum, 2, 2).start();
+                    new CountUp("balance-sum", (earn_sum - consumption_sum), (this.earn_sum - this.consumption_sum), 2, 2).start();
+                });
+            },
+            /**获取账单信息*/
+            fetchBillArr () {
+                this.bill_arr = Util.Bill.query();
+            },
             /**过滤账单*/
             filterBill () {
                 this.$vux.toast.show({
                     type: 'text',
-                    text: '请至少填写一样筛选信息'
+                    width: 'auto',
+                    text: '请至少填写一样筛选信息',
+                    position: 'top'
                 })
             },
             /**手势判断*/
@@ -358,6 +285,26 @@
                         }
                     });
                 })
+            },
+            /**计算金额*/
+            countSum () {
+                var earn_sum = this.earn_sum,
+                    consumption_sum = this.consumption_sum;
+                if(!this.bill_arr.length){
+                    this.earn_sum = 0;
+                    this.consumption_sum = 0;
+                }
+                this.bill_arr.forEach((item,index) => {
+                    if(item.consumption_or_earn == 1)
+                        this.earn_sum =  this.earn_sum + (+item.sum_value);
+                    else
+                        this.consumption_sum =  this.consumption_sum + (+item.sum_value);
+                });
+                this.$nextTick(() => {
+                    new CountUp("earn-sum", earn_sum, this.earn_sum, 2, 2).start();
+                    new CountUp("consumption-sum", consumption_sum, this.consumption_sum, 2, 2).start();
+                    new CountUp("balance-sum", (earn_sum-consumption_sum), (this.earn_sum - this.consumption_sum), 2, 2).start();
+                });
             },
             change (value) {
                 console.log('change', value)

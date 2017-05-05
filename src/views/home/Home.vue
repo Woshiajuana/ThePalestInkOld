@@ -7,7 +7,7 @@
                     <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#type-jbgz"></use>
                 </svg>
                 <h2 class="balance-title">可用余额</h2>
-                <h1 class="balance-total">6000.00</h1>
+                <h1 class="balance-total" id="total_balance"></h1>
             </div>
             <div class="home-btn-wrap">
                 <span class="home-btn-item">本月可用余额</span>
@@ -23,11 +23,14 @@
     import { Scroller } from 'vux'
     import GestureMobile from '../../assets/lib/GestureMobile'
     import types from '../../store/mutation-types'
+    import CountUp from '../../assets/lib/countUp'
+    import Util from '../../assets/lib/Util'
     export default {
         name: 'home',
         data: function () {
             return {
-                is_open: false
+                is_open: false,
+                total_balance: 0
             }
         },
         components:{
@@ -36,6 +39,7 @@
         created () {
             this.gestureMobile();
             this.setNavIndex();
+            this.fetchBalance();
         },
         methods: {
             /**手势*/
@@ -52,6 +56,14 @@
                     });
                 })
             },
+            /**获取可用余额*/
+            fetchBalance () {
+                this.total_balance = Util.TotalBalance.query();
+                this.$nextTick(() => {
+                    new CountUp("total_balance", 0, this.total_balance, 2, 2).start();
+                })
+            },
+            /**设置导航条按钮状态*/
             setNavIndex () {
                 this.$store.commit(types.SET_NAV_INDEX,'1')
             }
