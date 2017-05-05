@@ -114,7 +114,7 @@
                         account_type = 'shrc';
                         break;
                     case '租房水电':
-                        account_type = 'zfsd';
+                        account_type = 'cfsd';
                         break;
                     case '医疗药物':
                         account_type = 'ylyw';

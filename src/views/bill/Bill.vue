@@ -108,7 +108,14 @@
             <!--/过滤信息菜单-->
             <!--账单信息-->
             <div class="bill-wrap">
-                <scroller lock-x
+                <div class="bill-null-warp" v-show="!bill_arr.length">
+                    <svg class="bill-list-null-icon">
+                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#null-icon"></use>
+                    </svg>
+                    <span>没有相关账单</span>
+                </div>
+                <scroller v-show="bill_arr.length"
+                          lock-x
                           height="-118"
                           :scrollbarY="true"
                           @on-scroll="onScroll"
@@ -340,6 +347,21 @@
 </script>
 <style lang="scss">
     @import "../../assets/scss/define";
+    .bill-null-warp{
+        @extend %pa;
+        @extend %c9;
+        @extend %l0;
+        @extend %tac;
+        @extend %r0;
+        padding-top: 100px;
+    }
+    .bill-list-null-icon{
+        @extend %db;
+        @extend %ma;
+        width: 100px;
+        height: 50px;
+        fill: #999;
+    }
     .dialog-con{
         padding: 20px 0;
     }

@@ -75,7 +75,6 @@
                     billTypeNumber: this.billTypeNumber(this.account_type),
                     consumption_or_earn: 1
                 };
-                console.log(bill)
                 Util.Bill.save(bill);
                 this.showMsg('记账成功');
                 this.resetValue();

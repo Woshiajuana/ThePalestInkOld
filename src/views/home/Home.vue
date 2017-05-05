@@ -10,8 +10,10 @@
                 <h1 class="balance-total" id="total_balance"></h1>
             </div>
             <div class="home-btn-wrap">
-                <span class="home-btn-item">本月可用余额</span>
-                <span class="home-btn-item">实施计划经济</span>
+                <a href="#/account/consumption" class="go-account go-consumption">消费</a>
+                <a href="#/account/earn" class="go-account go-earn">入账</a>
+                <!--<span class="home-btn-item">本月可用余额</span>-->
+                <!--<span class="home-btn-item">实施计划经济</span>-->
             </div>
             <svg @click="is_open = true" slot="icon" class="home-arrow" v-show="!is_open">
                 <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#nav-arrow"></use>
