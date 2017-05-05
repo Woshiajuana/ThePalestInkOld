@@ -17,8 +17,7 @@
                             v-model="year_value"
                             format="YYYY"
                             confirm-text="完成"
-                            cancel-text="取消"
-                            @on-change="change">
+                            cancel-text="取消">
                         </datetime>
                     </li>
                     <li class="input-item">
@@ -27,8 +26,7 @@
                             v-model="month_value"
                             format="MM"
                             confirm-text="完成"
-                            cancel-text="取消"
-                            @on-change="change">
+                            cancel-text="取消">
                         </datetime>
                     </li>
                     <li class="input-item">
@@ -37,9 +35,11 @@
                             v-model="day_value"
                             format="DD"
                             confirm-text="完成"
-                            cancel-text="取消"
-                            @on-change="change">
+                            cancel-text="取消">
                         </datetime>
+                    </li>
+                    <li class="input-item">
+                        <popup-picker title="时间" v-model="formatDemoValue" :data="[['01','02','03'],['11','12','13']]" :display-format="format"></popup-picker>
                     </li>
                 </ul>
                 <div class="menu-type-wrap">
@@ -48,52 +48,52 @@
                         type="checkbox"
                         default-item-class="bill-type-check-item"
                         selected-item-class="bill-type-check-item-selected">
-                        <checker-item :value="1">
+                        <checker-item :value="'sgls'">
                             <svg class="checker-item-icon">
                                 <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#type-sgls"></use>
                             </svg>
                         </checker-item>
-                        <checker-item :value="2">
+                        <checker-item :value="'cyhs'">
                             <svg class="checker-item-icon">
                                 <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#type-cyhs"></use>
                             </svg>
                         </checker-item>
-                        <checker-item :value="3">
+                        <checker-item :value="'cxly'">
                             <svg class="checker-item-icon">
                                 <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#type-cxly"></use>
                             </svg>
                         </checker-item>
-                        <checker-item :value="4">
+                        <checker-item :value="'wsgw'">
                             <svg class="checker-item-icon">
                                 <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#type-wsgw"></use>
                             </svg>
                         </checker-item>
-                        <checker-item :value="5">
+                        <checker-item :value="'shrc'">
                             <svg class="checker-item-icon">
                                 <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#type-shrc"></use>
                             </svg>
                         </checker-item>
-                        <checker-item :value="6">
+                        <checker-item :value="'cfsd'">
                             <svg class="checker-item-icon">
                                 <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#type-cfsd"></use>
                             </svg>
                         </checker-item>
-                        <checker-item :value="7">
+                        <checker-item :value="'ylyw'">
                             <svg class="checker-item-icon">
                                 <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#type-ylyw"></use>
                             </svg>
                         </checker-item>
-                        <checker-item :value="8">
+                        <checker-item :value="'jbgz'">
                             <svg class="checker-item-icon">
                                 <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#type-jbgz"></use>
                             </svg>
                         </checker-item>
-                        <checker-item :value="9">
+                        <checker-item :value="'gsfl'">
                             <svg class="checker-item-icon">
                                 <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#type-gsfl"></use>
                             </svg>
                         </checker-item>
-                        <checker-item :value="10">
+                        <checker-item :value="'qt'">
                             <svg class="checker-item-icon">
                                 <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#type-qt"></use>
                             </svg>
@@ -102,7 +102,7 @@
                 </div>
                 <div class="menu-btn-wrap">
                     <i class="menu-btn menu-sure-btn" @click="filterBill()">确定</i>
-                    <i class="menu-btn menu-reset-btn">重置</i>
+                    <i class="menu-btn menu-reset-btn" @click="resetFilter()">重置</i>
                 </div>
             </div>
             <!--/过滤信息菜单-->
@@ -133,7 +133,7 @@
                                 <span class="bill-item-sum" v-text="bill_item.sum_value"></span>
                             </p>
                             <p class="bill-item-time">{{bill_item.consumption_or_earn == 1 ? '入账' : '消费'}}时间：{{bill_item.date_value}} {{bill_item.time_value}}</p>
-                            <i class="bill-cancel" @click="removeBill(bill_item)">取消</i>
+                            <i class="bill-cancel" @click="confirmRemoveBill(bill_item)">取消</i>
                         </li>
                     </ul>
                 </scroller>
@@ -142,7 +142,7 @@
             <!--账单信息提示-->
             <div class="bill-prompt-wrap">
                 <div class="bill-prompt">
-                    <span class="bill-sum-title" @click="fetchBillArr()">入账</span>
+                    <span class="bill-sum-title">入账</span>
                     <span class="bill-sum bill-sum-earn" id="earn-sum"></span>
                 </div>
                 <i class="bill-reduce"></i>
@@ -161,21 +161,11 @@
         <!--/主体内容-->
         <!--弹窗提示-->
         <x-dialog v-model="show_dialog" class="dialog-demo" hide-on-blur>
-            <div class="img-box">
-                xxxxxxx<br>
-                xxxxxxx<br>
-                xxxxxxx<br>
-                xxxxxxx<br>
-                xxxxxxx<br>
-                xxxxxxx<br>
-                xxxxxxx<br>
-                xxxxxxx<br>
-                xxxxxxx<br>
-                xxxxxxx<br>
-                xxxxxxx<br>
+            <div class="dialog-con">
+                确定移除该条记录？
             </div>
             <span class="bill-dialog-close"  @click="show_dialog = false"></span>
-            <div class="bill-dialog-box" @click="show_dialog=false">
+            <div class="bill-dialog-box" @click="removeBill()">
                 <span class="bill-dialog-ok"></span>
             </div>
         </x-dialog>
@@ -183,7 +173,7 @@
     </div>
 </template>
 <script>
-    import { Scroller, Datetime , Checker, CheckerItem ,XDialog } from 'vux'
+    import { PopupPicker, Scroller, Datetime , Checker, CheckerItem ,XDialog } from 'vux'
     import GestureMobile from '../../assets/lib/GestureMobile'
     import Util from '../../assets/lib/Util'
     import CountUp from '../../assets/lib/countUp'
@@ -193,15 +183,21 @@
         name: 'bill',
         data () {
             return {
+                remove_bill: '',
+                data_list: [],
+                formatDemoValue: ['01', '12'],
+                format: function (value, name) {
+                    return `${value[0]}:${value[1]}`
+                },
                 earn_sum: 0,
                 consumption_sum: 0,
                 bill_arr: [],
                 show_dialog: false,
                 check_value_arr: '',
                 is_btn_active: false,
-                day_value: Tool.format('dd'),
-                month_value: Tool.format('MM'),
-                year_value: Tool.format('yyyy'),
+                day_value: '',
+                month_value: '',
+                year_value: '',
                 is_open_menu: false,
                 pull_down_config: {
                     content: '下拉刷新',
@@ -239,25 +235,38 @@
             Datetime,
             Checker,
             CheckerItem,
-            XDialog
+            XDialog,
+            PopupPicker
         },
         methods: {
+            /**重置删选条件*/
+            resetFilter () {
+                this.day_value = '';
+                this.month_value = '';
+                this.year_value = '';
+            },
+            /**弹窗对话*/
+            confirmRemoveBill (bill) {
+                this.show_dialog = true;
+                this.remove_bill = bill;
+            },
             /**删除账单信息*/
-            removeBill (bill) {
-                Util.Bill.remove(bill);
+            removeBill () {
+                Util.Bill.remove(this.remove_bill);
                 this.fetchBillArr();
                 var earn_sum = this.earn_sum,
                     consumption_sum = this.consumption_sum;
-                if (bill.consumption_or_earn == 0){
-                    this.consumption_sum = this.consumption_sum - bill.sum_value;
+                if (this.remove_bill.consumption_or_earn == 0){
+                    this.consumption_sum = this.consumption_sum - this.remove_bill.sum_value;
                 } else {
-                    this.earn_sum = this.earn_sum - bill.sum_value;
+                    this.earn_sum = this.earn_sum - this.remove_bill.sum_value;
                 }
                 this.$nextTick(() => {
                     new CountUp("earn-sum", earn_sum, this.earn_sum, 2, 2).start();
                     new CountUp("consumption-sum", consumption_sum, this.consumption_sum, 2, 2).start();
                     new CountUp("balance-sum", (earn_sum - consumption_sum), (this.earn_sum - this.consumption_sum), 2, 2).start();
                 });
+                this.show_dialog = false;
             },
             /**获取账单信息*/
             fetchBillArr () {
@@ -265,10 +274,15 @@
             },
             /**过滤账单*/
             filterBill () {
+//                if(this.check_value_arr || this.day_value || this.)
+
+            },
+            /**提示信息*/
+            showMsg (msg) {
                 this.$vux.toast.show({
                     type: 'text',
                     width: 'auto',
-                    text: '请至少填写一样筛选信息',
+                    text: msg,
                     position: 'top'
                 })
             },
@@ -306,18 +320,6 @@
                     new CountUp("balance-sum", (earn_sum-consumption_sum), (this.earn_sum - this.consumption_sum), 2, 2).start();
                 });
             },
-            change (value) {
-                console.log('change', value)
-            },
-            onShow () {
-                console.log('on show')
-            },
-            onHide (type) {
-                console.log('on hide', type)
-            },
-            onChange (val) {
-                console.log('val change', val)
-            },
             onScroll (pos) {
                 this.scrollTop = pos.top;
             },
@@ -338,6 +340,9 @@
 </script>
 <style lang="scss">
     @import "../../assets/scss/define";
+    .dialog-con{
+        padding: 20px 0;
+    }
     .bill-dialog-box{
         background-color: #F9FAFC;
     }
