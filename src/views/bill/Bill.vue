@@ -112,7 +112,6 @@
                     <span>没有相关账单</span>
                 </div>
                 <!--
-
                           :use-pulldown="true"
                           :use-pullup="true"
                           @on-pulldown-loading="onPullDownLoading"
