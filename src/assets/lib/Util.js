@@ -29,7 +29,49 @@ const Util = function (win) {
         query ( query_condition ) {
             var bill_arr = Tool.dataToLocalStorageOperate.achieve('bill_arr') || [];
             if( query_condition ){
-
+                var year_value = query_condition.year_value;
+                var month_value = query_condition.month_value;
+                var day_value = query_condition.day_value;
+                var check_value_arr = query_condition.check_value_arr;
+                if(year_value){
+                    var arr = [];
+                    bill_arr.forEach((item,index) => {
+                        if(item.date_value.split('-')[0] == year_value){
+                            arr.push(item);
+                        }
+                    });
+                    bill_arr = arr;
+                }
+                if(month_value){
+                    var arr = [];
+                    bill_arr.forEach((item,index) => {
+                        if(item.date_value.split('-')[1] == month_value){
+                            arr.push(item);
+                        }
+                    });
+                    bill_arr = arr;
+                }
+                if(day_value){
+                    var arr = [];
+                    bill_arr.forEach((item,index) => {
+                        if(item.date_value.split('-')[2] == day_value){
+                            arr.push(item);
+                        }
+                    });
+                    bill_arr = arr;
+                }
+                if(check_value_arr.length){
+                    var arr = [];
+                    check_value_arr.forEach((item,index) => {
+                        bill_arr.forEach((it,i) => {
+                            console.log(it.billTypeNumber,item)
+                            if(it.billTypeNumber == item){
+                                arr.push(it);
+                            }
+                        });
+                    });
+                    bill_arr = arr;
+                }
             }
             return bill_arr;
         },

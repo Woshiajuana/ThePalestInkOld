@@ -20,7 +20,7 @@
                             cancel-text="取消">
                         </datetime>
                     </li>
-                    <li class="input-item">
+                    <li class="input-item" v-show="year_value">
                         <datetime
                             title="月："
                             v-model="month_value"
@@ -29,7 +29,7 @@
                             cancel-text="取消">
                         </datetime>
                     </li>
-                    <li class="input-item">
+                    <li class="input-item" v-show="month_value">
                         <datetime
                             title="日："
                             v-model="day_value"
@@ -37,9 +37,6 @@
                             confirm-text="完成"
                             cancel-text="取消">
                         </datetime>
-                    </li>
-                    <li class="input-item">
-                        <popup-picker title="时间" v-model="formatDemoValue" :data="[['01','02','03'],['11','12','13']]" :display-format="format"></popup-picker>
                     </li>
                 </ul>
                 <div class="menu-type-wrap">
@@ -180,7 +177,7 @@
     </div>
 </template>
 <script>
-    import { PopupPicker, Scroller, Datetime , Checker, CheckerItem ,XDialog } from 'vux'
+    import { Scroller, Datetime , Checker, CheckerItem ,XDialog } from 'vux'
     import GestureMobile from '../../assets/lib/GestureMobile'
     import Util from '../../assets/lib/Util'
     import CountUp from '../../assets/lib/countUp'
@@ -242,10 +239,21 @@
             Datetime,
             Checker,
             CheckerItem,
-            XDialog,
-            PopupPicker
+            XDialog
         },
         methods: {
+            /**过滤账单*/
+            filterBill () {
+                var query_condition = {
+                    year_value: this.year_value,
+                    month_value: this.month_value,
+                    day_value: this.day_value,
+                    check_value_arr: this.check_value_arr
+                };
+                this.bill_arr = Util.Bill.query(query_condition);
+                this.countSum();
+                this.is_open_menu = false;
+            },
             /**重置删选条件*/
             resetFilter () {
                 this.day_value = '';
@@ -279,11 +287,6 @@
             fetchBillArr () {
                 this.bill_arr = Util.Bill.query();
             },
-            /**过滤账单*/
-            filterBill () {
-//                if(this.check_value_arr || this.day_value || this.)
-
-            },
             /**提示信息*/
             showMsg (msg) {
                 this.$vux.toast.show({
@@ -311,7 +314,7 @@
             countSum () {
                 var earn_sum = this.earn_sum,
                     consumption_sum = this.consumption_sum;
-                if(!this.bill_arr.length){
+                if(this.bill_arr.length){
                     this.earn_sum = 0;
                     this.consumption_sum = 0;
                 }
@@ -347,6 +350,10 @@
 </script>
 <style lang="scss">
     @import "../../assets/scss/define";
+    .menu-type-wrap{
+        @extend %clearfix;
+        margin-top: 10px;
+    }
     .bill-null-warp{
         @extend %pa;
         @extend %c9;
