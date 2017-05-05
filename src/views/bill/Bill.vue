@@ -111,17 +111,20 @@
                     </svg>
                     <span>没有相关账单</span>
                 </div>
-                <scroller v-show="bill_arr.length"
-                          lock-x
-                          height="-118"
-                          :scrollbarY="true"
-                          @on-scroll="onScroll"
+                <!--
+
                           :use-pulldown="true"
                           :use-pullup="true"
                           @on-pulldown-loading="onPullDownLoading"
                           @on-pullup-loading="onPullUpLoading"
                           :pulldown-config="pull_down_config"
                           :pullup-config="pull_up_config"
+                -->
+                <scroller v-show="bill_arr.length"
+                          lock-x
+                          height="-118"
+                          :scrollbarY="true"
+                          @on-scroll="onScroll"
                           ref="homeScrollEvent">
                     <ul class="bill-list">
                         <li class="bill-item" v-for="(bill_item,bill_index) in bill_arr">
@@ -139,6 +142,7 @@
                             <p class="bill-item-time">{{bill_item.consumption_or_earn == 1 ? '入账' : '消费'}}时间：{{bill_item.date_value}} {{bill_item.time_value}}</p>
                             <i class="bill-cancel" @click="confirmRemoveBill(bill_item)">取消</i>
                         </li>
+                        <li class="bill-item-null"></li>
                     </ul>
                 </scroller>
             </div>
@@ -252,7 +256,6 @@
                 };
                 this.fetchBillArr(query_condition);
                 this.countSum();
-
                 this.is_open_menu = false;
             },
             /**重置删选条件*/
@@ -605,6 +608,9 @@
         &:last-child{
             border-bottom: none;
         }
+    }
+    .bill-item-null{
+        padding: 20px 0;
     }
     .bill-item-type{
         @extend %pa;
