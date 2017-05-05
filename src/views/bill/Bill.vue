@@ -250,8 +250,9 @@
                     day_value: this.day_value,
                     check_value_arr: this.check_value_arr
                 };
-                this.bill_arr = Util.Bill.query(query_condition);
+                this.fetchBillArr(query_condition);
                 this.countSum();
+
                 this.is_open_menu = false;
             },
             /**重置删选条件*/
@@ -284,8 +285,11 @@
                 this.show_dialog = false;
             },
             /**获取账单信息*/
-            fetchBillArr () {
-                this.bill_arr = Util.Bill.query();
+            fetchBillArr (query_condition) {
+                this.bill_arr = Util.Bill.query(query_condition);
+                this.$nextTick(() => {
+                    this.$refs.homeScrollEvent.reset();
+                });
             },
             /**提示信息*/
             showMsg (msg) {
