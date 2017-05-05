@@ -64,7 +64,6 @@ const Util = function (win) {
                     var arr = [];
                     check_value_arr.forEach((item,index) => {
                         bill_arr.forEach((it,i) => {
-                            console.log(it.billTypeNumber,item)
                             if(it.billTypeNumber == item){
                                 arr.push(it);
                             }

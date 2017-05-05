@@ -314,10 +314,8 @@
             countSum () {
                 var earn_sum = this.earn_sum,
                     consumption_sum = this.consumption_sum;
-                if(this.bill_arr.length){
-                    this.earn_sum = 0;
-                    this.consumption_sum = 0;
-                }
+                this.earn_sum = 0;
+                this.consumption_sum = 0;
                 this.bill_arr.forEach((item,index) => {
                     if(item.consumption_or_earn == 1)
                         this.earn_sum =  this.earn_sum + (+item.sum_value);
