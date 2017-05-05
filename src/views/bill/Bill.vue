@@ -260,6 +260,7 @@
                 this.day_value = '';
                 this.month_value = '';
                 this.year_value = '';
+                this.check_value_arr = '';
             },
             /**弹窗对话*/
             confirmRemoveBill (bill) {
