@@ -162,7 +162,7 @@
         border-radius: 10px;
         width: 180px;
         height: 45px;
-        bottom: 100px;
+        bottom: 80px;
         box-shadow: 0 5px 0 0 #1D8CE0;
         margin-left: -90px;
         line-height: 45px;
