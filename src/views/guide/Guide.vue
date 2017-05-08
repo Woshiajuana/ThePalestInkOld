@@ -29,6 +29,7 @@
 <script>
     import GestureMobile from '../../assets/lib/GestureMobile'
     import Tool from '../../assets/lib/Tool'
+    import types from '../../store/mutation-types'
     export default {
         name: 'guide',
         data () {
@@ -43,6 +44,7 @@
             }
         },
         created () {
+            this.$store.commit(types.JUDGE_IS_NOT_FIRST,false);
             this.$nextTick(() => {
                 let _this = this;
                 GestureMobile(this.$el,{
@@ -61,6 +63,7 @@
             /**跳过引导页面*/
             jumpGuide () {
                 Tool.dataToLocalStorageOperate.save('is_not_first',true);
+                this.$store.commit(types.JUDGE_IS_NOT_FIRST,true);
                 this.$router.push('/')
             },
             /**索引触发*/

@@ -9,7 +9,7 @@
         <!--/主体内容视图-->
 
         <!--导航条-->
-        <tabbar>
+        <tabbar v-if="isNotFirst">
             <tabbar-item :selected="navIndex == 1" link="/">
                 <svg slot="icon" class="nav-item nav-home-item">
                     <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#nav-home"></use>
@@ -54,6 +54,9 @@
             },
             navIndex () {
                 return this.$store.state.nav_index;
+            },
+            isNotFirst () {
+                return this.$store.state.is_not_first;
             }
         },
         components: {
