@@ -35,12 +35,7 @@
         font-size: 16px !important;
         color: #828282 !important;
     }
-    .header-title{
-        @extend %f18;
-        @extend %fwn;
-        padding: 20px;
-        color: #1D8CE0;
-    }
+
     .input-warp{
         padding: 0 10px;
     }

@@ -1,6 +1,6 @@
 <template>
     <div class="container-view">
-        <h1 class="header-title">分析：</h1>
+        <head-title :title="'分析：'"></head-title>
         <div class="chart-wrap">
             <scroller lock-x
                       height="-118"
@@ -23,6 +23,7 @@
 </template>
 <script>
     import types from '../../store/mutation-types'
+    import headTitle from '../../components/head-title.vue'
     import Util from '../../assets/lib/Util'
     import { Scroller } from 'vux'
     export default {
@@ -34,7 +35,8 @@
             }
         },
         components: {
-            Scroller
+            Scroller,
+            headTitle
         },
         created () {
             this.$store.commit(types.SET_NAV_INDEX,'4');

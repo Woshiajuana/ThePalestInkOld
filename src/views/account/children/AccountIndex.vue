@@ -1,6 +1,6 @@
 <template>
     <div class="account-wrap">
-        <h1 class="header-title">记账：</h1>
+        <head-title :title="'记账：'"></head-title>
         <div class="go-btn-box">
             <a href="#/account/consumption" class="go-account go-consumption">消费</a>
             <a href="#/account/earn" class="go-account go-earn">入账</a>
@@ -9,10 +9,14 @@
 </template>
 <script>
     import types from '../../../store/mutation-types'
+    import headTitle from '../../../components/head-title.vue'
     export default {
         name: 'account_index',
         created () {
             this.setNavIndex();
+        },
+        components: {
+            headTitle
         },
         methods: {
             setNavIndex () {

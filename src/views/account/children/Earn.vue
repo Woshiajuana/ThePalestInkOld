@@ -1,6 +1,6 @@
 <template>
     <div class="earn-wrap">
-        <h1 class="header-title">入账：</h1>
+        <head-title :title="'入账：'"></head-title>
         <ul class="input-warp">
             <li class="input-item input-required">
                 <calendar v-model="date_value" title="日期：" disable-future></calendar>
@@ -33,6 +33,7 @@
 </template>
 <script>
     import { PopupPicker, Datetime , Calendar, XInput } from 'vux'
+    import headTitle from '../../../components/head-title.vue'
     import Tool from '../../../assets/lib/Tool'
     import Util from '../../../assets/lib/Util'
     import types from '../../../store/mutation-types'
@@ -42,7 +43,8 @@
             Calendar,
             Datetime,
             XInput,
-            PopupPicker
+            PopupPicker,
+            headTitle
         },
         data () {
             return {

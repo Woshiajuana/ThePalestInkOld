@@ -3,13 +3,13 @@
         <!--主体内容-->
         <div class="container-box"
             :class="{'open-menu': is_open_menu}">
-            <h1 class="header-title">账单：</h1>
+            <head-title :title="'账单：'"></head-title>
             <svg @click="is_open_menu = !is_open_menu" class="bill-filter">
                 <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#filter-icon"></use>
             </svg>
             <!--过滤信息菜单-->
             <div class="filter-menu">
-                <h2 class="header-title">筛选：</h2>
+                <head-title :title="'筛选：'"></head-title>
                 <ul class="input-warp">
                     <li class="input-item">
                         <datetime
@@ -181,6 +181,7 @@
 </template>
 <script>
     import { Scroller, Datetime , Checker, CheckerItem ,XDialog } from 'vux'
+    import headTitle from '../../components/head-title.vue'
     import GestureMobile from '../../assets/lib/GestureMobile'
     import Util from '../../assets/lib/Util'
     import CountUp from '../../assets/lib/countUp'
@@ -242,7 +243,8 @@
             Datetime,
             Checker,
             CheckerItem,
-            XDialog
+            XDialog,
+            headTitle
         },
         methods: {
             /**过滤账单*/
