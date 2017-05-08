@@ -513,10 +513,12 @@
     }
     .checker-item-icon{
         @extend %pa;
-        top: 20%;
-        left: 20%;
-        width: 60%;
-        height: 60%;
+        @extend %t50;
+        @extend %l50;
+        width: 30px;
+        height: 30px;
+        margin-top: -15px;
+        margin-left: -15px;
         fill: #ccc;
         transition: all .5s;
     }
