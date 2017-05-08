@@ -48,11 +48,11 @@
             this.$nextTick(() => {
                 let _this = this;
                 GestureMobile(this.$el,{
-                    leftCallBackFun (distance) {
+                    leftCallBackFun () {
                         if(_this.guide_active_index == _this.guide_arr.length) return;
                         _this.guide_active_index++;
                     },
-                    rightCallBackFun (distance) {
+                    rightCallBackFun () {
                         if(_this.guide_active_index == 1) return;
                         _this.guide_active_index--;
                     }
@@ -111,19 +111,35 @@
         @extend %l0;
         @extend %r0;
         @extend %fs0;
-        bottom: 20px;
+        bottom: 30px;
     }
     .guide-trigger-item{
         @extend %cp;
         @extend %dib;
-        width: 8px;
-        height: 8px;
-        background-color: #cccccc;
+        @extend %pr;
+        width: 10px;
+        height: 10px;
+        border: 1px solid #58B7FF;
         border-radius: 50%;
-        margin: 0 2px;
+        margin: 0 5px;
         transition: all .5s;
+        &:after{
+            content: '';
+            @extend %pa;
+            @extend %t50;
+            @extend %l50;
+            width: 6px;
+            height: 6px;
+            margin-top: -3px;
+            margin-left: -3px;
+            transition: all .5s;
+            border-radius: 50%;
+            background-color: #fff;
+        }
         &.guide-active-trigger{
-            background-color: #58B7FF;
+            &:after{
+                background-color: #58B7FF;
+            }
         }
     }
     .guide-jump{
