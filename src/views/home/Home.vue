@@ -121,9 +121,9 @@
         &:after{
             @extend %pa;
             @extend %f12;
+            @extend %b0;
             line-height: 42px;
             content: '(￥)';
-            bottom: 0;
             color: #999;
         }
     }

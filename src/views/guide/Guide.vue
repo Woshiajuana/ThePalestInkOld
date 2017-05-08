@@ -105,9 +105,9 @@
     .guide-trigger{
         @extend %pa;
         @extend %tac;
-        left: 0;
-        right: 0;
-        font-size: 0;
+        @extend %l0;
+        @extend %r0;
+        @extend %fs0;
         bottom: 20px;
     }
     .guide-trigger-item{

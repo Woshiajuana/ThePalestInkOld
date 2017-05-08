@@ -133,8 +133,8 @@
         @extend %pa;
         @extend %w100;
         @extend %ios;
+        @extend %b0;
         top: 64px;
-        bottom: 0;
     }
     .chart-title{
         @extend %f14;
