@@ -526,8 +526,8 @@
         @extend %oya;
         @extend %pa;
         @extend %w100;
+        @extend %b0;
         top: 64px;
-        bottom: 0;
     }
     .bill-filter{
         @extend %pa;
@@ -557,10 +557,10 @@
         background-color: #fff;
         &:before{
             content: " ";
-            position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
+            @extend %pa;
+            @extend %l0;
+            @extend %t0;
+            @extend %b0;
             width: 1px;
             background-color: #999;
             -webkit-transform-origin: 0 0;
@@ -579,9 +579,9 @@
     .menu-btn-wrap{
         @extend %pa;
         @extend %df;
-        bottom: 0;
-        left: 0;
-        right: 0;
+        @extend %b0;
+        @extend %l0;
+        @extend %r0;
     }
     .menu-btn{
         @extend %df1;
