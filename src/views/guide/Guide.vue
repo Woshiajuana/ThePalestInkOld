@@ -154,18 +154,17 @@
     .guide-go{
         @extend %pa;
         @extend %tac;
-        @extend %f16;
-        @extend %fwb;
+        @extend %f14;
         @extend %cp;
         @extend %l50;
         @extend %cfff;
         border-radius: 10px;
-        width: 180px;
-        height: 45px;
+        width: 120px;
+        height: 40px;
         bottom: 80px;
-        box-shadow: 0 5px 0 0 #1D8CE0;
-        margin-left: -90px;
-        line-height: 45px;
+        box-shadow: 0 3px 0 0 #1D8CE0;
+        margin-left: -60px;
+        line-height: 40px;
         background-color: #58B7FF;
     },
     .guide-wrap-hide{
