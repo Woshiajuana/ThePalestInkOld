@@ -54,6 +54,7 @@
         height: 50px;
         line-height: 50px;
         border-bottom: 1px solid #ccc;
+        transition: border-bottom .5s;
         .vux-cell-box:before {
             @extend %dn;
         }
