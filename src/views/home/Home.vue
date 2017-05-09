@@ -3,19 +3,19 @@
         <div class="home-wrap"
             :class="{'home-active': is_open}">
             <div class="balance-wrap">
-                <svg slot="icon" class="balance-icon">
+                <svg class="balance-icon">
                     <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#type-jbgz"></use>
                 </svg>
-                <h2 class="balance-title">可用余额</h2>
-                <h2 class="balance-total" id="total_balance">
+                <h3 class="balance-title">可用余额</h3>
+                <h1 class="balance-total" id="total_balance">
                     <spinner type="ios" slot="value"></spinner>
-                </h2>
+                </h1>
             </div>
             <div class="home-btn-wrap">
                 <a href="#/account/consumption" class="go-account go-consumption">消费</a>
                 <a href="#/account/earn" class="go-account go-earn">入账</a>
             </div>
-            <svg @click="is_open = true" slot="icon" class="home-arrow" v-show="!is_open">
+            <svg @click="is_open = true" class="home-arrow" v-show="!is_open">
                 <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#nav-arrow"></use>
             </svg>
         </div>
@@ -40,9 +40,9 @@
             Spinner
         },
         created () {
+            this.fetchBalance();
             this.gestureMobile();
             this.setNavIndex();
-            this.fetchBalance();
         },
         methods: {
             /**手势*/

@@ -1,5 +1,5 @@
 {
-    "status": 1,
+    "status": -1,
     "msg": "请求成功",
     "data": {
         "total_balance": 8888
