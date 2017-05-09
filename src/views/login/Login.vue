@@ -18,7 +18,7 @@
             </li>
         </ul>
         <div class="user-relevant">
-            <span class="remember-user remember-active-user">
+            <span @click=" is_remember = !is_remember " :class="{ 'remember-active-user': is_remember }" class="remember-user">
                 <i class="remember-type"></i>
                 记住密码
             </span>
@@ -36,6 +36,7 @@
         name: 'login',
         data () {
             return {
+                is_remember: false,
                 name_value: '',
                 password_value: ''
             }
@@ -121,11 +122,5 @@
         padding-right: 10px;
         height: 25px;
         fill: #999;
-    }
-    .input-item{
-        div{
-            height: 100%;
-            background-color: transparent;
-        }
     }
 </style>

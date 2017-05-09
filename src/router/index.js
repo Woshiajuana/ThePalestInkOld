@@ -44,7 +44,7 @@ const router = new Router({
             name: 'register',
             component: Register,
             meta: {
-                status: 1
+                status: 2
             }
         },
         /**首页*/
@@ -53,7 +53,7 @@ const router = new Router({
             name: 'home',
             component: Home,
             meta: {
-                status: 1
+                status: 3
             }
         },
         /**记账*/
@@ -62,7 +62,7 @@ const router = new Router({
             name: 'account',
             component: Account,
             meta: {
-                status: 2
+                status: 4
             },
             children: [
                 {
@@ -70,7 +70,7 @@ const router = new Router({
                     name: 'account_index',
                     component: AccountIndex,
                     meta: {
-                        status: 3
+                        status: 5
                     }
                 },
                 {
@@ -78,7 +78,7 @@ const router = new Router({
                     name: 'consumption',
                     component: Consumption,
                     meta: {
-                        status: 4
+                        status: 6
                     }
                 },
                 {
@@ -86,7 +86,7 @@ const router = new Router({
                     name: 'earn',
                     component: Earn,
                     meta: {
-                        status: 4
+                        status: 6
                     }
                 }
             ]
@@ -97,7 +97,7 @@ const router = new Router({
             name: 'bill',
             component: Bill,
             meta: {
-                status: 5
+                status: 7
             }
         },
         /**分析页面*/
@@ -106,7 +106,7 @@ const router = new Router({
             name: 'chart',
             component: Chart,
             meta: {
-                status: 6
+                status: 8
             }
         },
         /**协议页面*/

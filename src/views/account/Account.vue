@@ -50,6 +50,7 @@
     }
     .bill-time-item,
     .input-item{
+        @extend %pr;
         height: 50px;
         line-height: 50px;
         border-bottom: 1px solid #ccc;
@@ -87,6 +88,21 @@
         }
         .inline-calendar td.is-today, .inline-calendar td.is-today.is-disabled {
             color: #58B7FF;
+        }
+        &:after,
+        &:before{
+            content: '';
+            @extend %pa;
+            @extend %b0;
+            width: 1px;
+            height: 5px;
+            background-color: #ccc;
+        }
+        &:after{
+            @extend %r0;
+        }
+        &:before{
+            @extend %l0;
         }
     }
     .sure-btn{
