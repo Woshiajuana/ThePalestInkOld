@@ -64,7 +64,7 @@
             jumpGuide () {
                 Tool.dataToLocalStorageOperate.save('is_not_first',true);
                 this.$store.commit(types.JUDGE_IS_NOT_FIRST,true);
-                this.$router.push('/')
+                this.$router.push('/register')
             },
             /**索引触发*/
             guideTrigger (guide_index) {

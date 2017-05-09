@@ -9,6 +9,8 @@ import Consumption from '../views/account/children/Consumption.vue'
 import Earn from '../views/account/children/Earn.vue'
 import Bill from '../views/bill/Bill.vue'
 import Chart from '../views/chart/Chart.vue'
+import Login from '../views/login/Login.vue'
+import Register from '../views/register/Register.vue'
 
 import Tool from '../assets/lib/Tool'
 
@@ -23,6 +25,24 @@ const router = new Router({
             component: Guide,
             meta: {
                 status: 0
+            }
+        },
+        /**登录页*/
+        {
+            path: '/login',
+            name: 'login',
+            component: Login,
+            meta: {
+                status: 1
+            }
+        },
+        /**注册页*/
+        {
+            path: '/register',
+            name: 'register',
+            component: Register,
+            meta: {
+                status: 1
             }
         },
         /**首页*/
@@ -95,14 +115,23 @@ const router = new Router({
  * 设置路由之间的跳转动画
  * */
 router.beforeEach( (to, from, next) => {
+    /**获取仓库*/
     let store = this.a.app.$store;
     if(store){
+        /**判断页面切换动画*/
         if(from.meta.status > to.meta.status) store.commit('SET_ANIMATE_NAME','vux-pop-out');
         else store.commit('SET_ANIMATE_NAME','vux-pop-in');
     }
+    /**获取用户是否第一次进入应用的状态*/
     let is_not_first = Tool.dataToLocalStorageOperate.achieve('is_not_first');
-    if ( !is_not_first && to.path != '/guide' ) next('/guide');
-    else if( is_not_first && to.path == '/guide' ) next('/');
+    if ( !is_not_first && to.path != '/guide' ) {
+        /**用户第一次进入且路径跳转不是为引导页的时候，跳转到引导页*/
+        next('/guide');
+    }
+    else if( is_not_first && to.path == '/guide' ) {
+        /**用户不是第一次进入且跳转路径为引导页的时候*/
+        next('/');
+    }
     else next();
 });
 
