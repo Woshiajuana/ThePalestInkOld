@@ -7,13 +7,13 @@
                     <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#type-jbgz"></use>
                 </svg>
                 <h2 class="balance-title">可用余额</h2>
-                <h1 class="balance-total" id="total_balance"></h1>
+                <h2 class="balance-total" id="total_balance">
+                    <spinner type="ios" slot="value"></spinner>
+                </h2>
             </div>
             <div class="home-btn-wrap">
                 <a href="#/account/consumption" class="go-account go-consumption">消费</a>
                 <a href="#/account/earn" class="go-account go-earn">入账</a>
-                <!--<span class="home-btn-item">本月可用余额</span>-->
-                <!--<span class="home-btn-item">实施计划经济</span>-->
             </div>
             <svg @click="is_open = true" slot="icon" class="home-arrow" v-show="!is_open">
                 <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#nav-arrow"></use>
@@ -22,7 +22,7 @@
     </div>
 </template>
 <script>
-    import { Scroller } from 'vux'
+    import { Scroller, Spinner} from 'vux'
     import GestureMobile from '../../assets/lib/GestureMobile'
     import types from '../../store/mutation-types'
     import CountUp from '../../assets/lib/countUp'
@@ -37,6 +37,7 @@
         },
         components:{
             Scroller,
+            Spinner
         },
         created () {
             this.gestureMobile();
@@ -60,10 +61,14 @@
             },
             /**获取可用余额*/
             fetchBalance () {
-                this.total_balance = Util.TotalBalance.query();
-                this.$nextTick(() => {
-                    new CountUp("total_balance", 0, this.total_balance, 2, 2).start();
-                })
+                Util.fetchTotalBalance( (data) => {
+                    this.total_balance = data.data.total_balance;
+                    setTimeout( () => {
+                        this.$nextTick(() => {
+                            new CountUp("total_balance", 0, this.total_balance, 2, 2).start();
+                        })
+                    },200)
+                });
             },
             /**设置导航条按钮状态*/
             setNavIndex () {
@@ -117,7 +122,7 @@
         margin-top: -24px;
         line-height: 48px;
         font-size: 24px;
-        color: #58B7FF;
+        color: #13CE66;
         &:after{
             @extend %pa;
             @extend %f12;
@@ -125,6 +130,9 @@
             line-height: 42px;
             content: '(￥)';
             color: #999;
+        }
+        .vux-spinner{
+            line-height: 28px;
         }
     }
     .balance-icon{

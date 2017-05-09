@@ -11,6 +11,7 @@ import Bill from '../views/bill/Bill.vue'
 import Chart from '../views/chart/Chart.vue'
 import Login from '../views/login/Login.vue'
 import Register from '../views/register/Register.vue'
+import Error from '../views/error/Error.vue'
 
 import Tool from '../assets/lib/Tool'
 
@@ -105,6 +106,15 @@ const router = new Router({
             component: Chart,
             meta: {
                 status: 6
+            }
+        },
+        /**异常错误页*/
+        {
+            path: '/error',
+            name: 'error',
+            component: Error,
+            meta: {
+                status: 999
             }
         }
     ]
