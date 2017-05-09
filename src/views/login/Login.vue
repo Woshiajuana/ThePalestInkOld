@@ -17,7 +17,7 @@
                 </x-input>
             </li>
         </ul>
-        
+
         <i class="sure-btn" :class="{'sure-active-true':name_value && password_value}">登录</i>
     </div>
 </template>

@@ -12,6 +12,7 @@ import Chart from '../views/chart/Chart.vue'
 import Login from '../views/login/Login.vue'
 import Register from '../views/register/Register.vue'
 import Error from '../views/error/Error.vue'
+import Agreement from '../views/agreement/Agreement.vue'
 
 import Tool from '../assets/lib/Tool'
 
@@ -106,6 +107,15 @@ const router = new Router({
             component: Chart,
             meta: {
                 status: 6
+            }
+        },
+        /**协议页面*/
+        {
+            path: '/agreement',
+            name: 'agreement',
+            component: Agreement,
+            meta: {
+                status: 998
             }
         },
         /**异常错误页*/
