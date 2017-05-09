@@ -32,6 +32,7 @@
             点击「注册」按钮，即代表你同意<a href="#/agreement">《浪笔头协议》</a>
         </p>
         <i class="sure-btn" :class="{'sure-active-true':name_value && password_value && too_password_value == password_value}">注册</i>
+        <a href="#/login" class="user-link">已有帐号？点我去登录</a>
     </div>
 </template>
 <script>
@@ -72,7 +73,7 @@
     .agreement-prompt{
         @extend %c9;
         @extend %f12;
-        margin: 20px 10px;
+        margin: 20px;
         a{
             @extend %fwb;
             color: #58B7FF;
