@@ -88,12 +88,16 @@
                     this.showMsg('请输入帐号');
                     return true;
                 }
+                if ( this.is_repeat ) {
+                    this.showMsg('帐号已存在');
+                    return true;
+                }
                 if ( !this.password_value ) {
                     this.showMsg('请输入密码');
                     return true;
                 }
-                if ( !this.too_password_value ) {
-                    this.showMsg('请确认密码');
+                if ( this.password_value.length != 6 ) {
+                    this.showMsg('请输入6位密码');
                     return true;
                 }
                 if ( this.password_value != this.too_password_value ) {
