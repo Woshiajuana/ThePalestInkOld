@@ -17,9 +17,23 @@ const Util = function (win) {
      * */
     if (win.location.href.indexOf('localhost') > -1){
         base_url = 'http://localhost:8088';
-        base_url = '';
+        // base_url = '';
     }
 
+    /**用户登录*/
+    Util.login = function (user,success_callback, fail_callback) {
+        Util.ajax( '/thepalestink/login', user, 'POST', success_callback, fail_callback );
+    };
+
+    /**验证注册时用户名是否已注册*/
+    Util.checkUserName = function (user_name,success_callback, fail_callback) {
+        Util.ajax( '/thepalestink/checkUserName', {user_name}, 'GET', success_callback, fail_callback );
+    };
+
+    /**用户注册*/
+    Util.register = function (new_user,success_callback, fail_callback) {
+        Util.ajax( '/thepalestink/register', new_user, 'POST', success_callback, fail_callback );
+    };
 
 
     /**
@@ -43,9 +57,9 @@ const Util = function (win) {
             /**没有登录跳转登录页面*/
             if (data.status === -1) {
                 router.push('/login');
-            } else if (data.status === 0) {
+            } else if (data.status === 2) {
                 router.push('/error');
-            } else if (data.status === 1) {
+            } else {
                 success_callback && success_callback(data);
             }
         }).catch( function (error) {
