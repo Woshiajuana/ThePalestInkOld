@@ -101,13 +101,17 @@
             /**发邮件*/
             sendEmail () {
                 if(this.checkInput()) return;
+                this.$vux.loading.show({text:'Loading'});
                 Util.sendEmail(this.email_value,(data) => {
-                    if (data.status == 1) {
-                        this.showMsg('验证邮件已发送');
-                        this.is_popup = true;
-                    } else{
-                        this.showMsg('验证邮件发送失败');
-                    }
+                    this.$vux.loading.hide();
+                    setTimeout(() => {
+                        if (data.status == 1) {
+                            this.showMsg('验证邮件已发送');
+                            this.is_popup = true;
+                        } else{
+                            this.showMsg('验证邮件发送失败');
+                        }
+                    },100)
                 })
             },
             /**注册*/
@@ -123,10 +127,14 @@
                     user_too_password: this.too_password_value,
                     user_code: this.code_value
                 };
+                this.$vux.loading.show({text:'Loading'});
                 Util.register(new_user,(data) => {
-                    this.showMsg(data.msg);
-                    if (data.status == 1) this.reset();
-                    this.is_popup = false;
+                    this.$vux.loading.hide();
+                    setTimeout(() => {
+                        this.showMsg(data.msg);
+                        if (data.status == 1) this.reset();
+                        this.is_popup = false;
+                    },100)
                 });
             },
             /**清空信息*/
