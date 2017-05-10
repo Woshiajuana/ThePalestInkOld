@@ -17,12 +17,10 @@ const Util = function (win) {
      * */
     if (win.location.href.indexOf('localhost') > -1){
         base_url = 'http://localhost:8088';
-        // base_url = '';
     }
 
     /**用户登录*/
     Util.login = function (user,success_callback, fail_callback) {
-        console.log(1)
         Util.ajax( '/thepalestink/login', user, 'POST', success_callback, fail_callback );
     };
 
@@ -52,7 +50,6 @@ const Util = function (win) {
      * 公用请求ajax的方式
      * */
     Util.ajax = function (path, data, http_method, success_callback, fail_callback) {
-        console.log(2)
         axios({
             url: path,
             method: http_method,
@@ -60,9 +57,9 @@ const Util = function (win) {
             params: data
         }).then( function (response) {
             var data = response.data;
-            console.log(3)
             /**没有登录跳转登录页面*/
             if (data.status === -1) {
+                Tool.dataToSessionStorageOperate.remove('user');
                 router.push('/login');
             } else if (data.status === 2) {
                 router.push('/error');
