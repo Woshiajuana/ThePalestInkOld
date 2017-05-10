@@ -51,10 +51,10 @@
         <x-dialog v-model="is_popup" class="dialog-demo">
             <div class="dialog-con">
                 <p class="dialog-prompt">
-                    我们已向邮箱{{email_value}}发送了验证码
+                    我们已向邮箱<strong>{{email_value}}</strong>发送了验证码(2分钟内有效)，请输入：
                 </p>
                 <div class="input-item input-required">
-                    <x-input novalidate type="text" placeholder="请输入验证码" title="验证码：" :min="6" :max="6" v-model="password_value"></x-input>
+                    <x-input novalidate type="text" placeholder="请输入验证码" title="验证码：" :min="6" :max="6" v-model="code_value"></x-input>
                 </div>
             </div>
             <span class="bill-dialog-close"  @click="is_popup = false"></span>
@@ -73,13 +73,14 @@
         name: 'register',
         data () {
             return {
+                code_value: '',
                 name_value: '',
                 email_value: '',
                 password_value: '',
                 too_password_value: '',
                 is_name_repeat: false,
                 is_email_repeat: false,
-                is_popup: true
+                is_popup: false
             }
         },
         computed: {
@@ -100,7 +101,7 @@
             /**发邮件*/
             sendEmail () {
                 if(this.checkInput()) return;
-                Util.sendEmail(this.user_email,(data) => {
+                Util.sendEmail(this.email_value,(data) => {
                     if (data.status == 1) {
                         this.showMsg('验证邮件已发送');
                         this.is_popup = true;
@@ -111,17 +112,22 @@
             },
             /**注册*/
             register () {
-                if(this.checkInput()) return;
+                if(!this.code_value) {
+                    this.showMsg('请输入验证码');
+                    return;
+                }
                 var new_user = {
                     user_name: this.name_value,
                     user_email: this.email_value,
                     user_password: this.password_value,
-                    user_too_password: this.too_password_value
+                    user_too_password: this.too_password_value,
+                    user_code: this.code_value
                 };
                 Util.register(new_user,(data) => {
                     this.showMsg(data.msg);
                     if (data.status == 1) this.reset();
-                })
+                    this.is_popup = false;
+                });
             },
             /**清空信息*/
             reset () {
@@ -207,7 +213,11 @@
     @import "../../assets/scss/define";
     .dialog-prompt{
         text-align: left;
+        line-height: 1.8;
         margin: 10px;
+        strong{
+            color: #58B7FF;
+        }
     }
     .dialog-demo{
         .input-item{
