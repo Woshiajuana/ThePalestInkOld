@@ -80,7 +80,8 @@
                 too_password_value: '',
                 is_name_repeat: false,
                 is_email_repeat: false,
-                is_popup: false
+                is_popup: false,
+                is_timer: false,
             }
         },
         computed: {
@@ -101,11 +102,14 @@
             /**发邮件*/
             sendEmail () {
                 if(this.checkInput()) return;
+                if(this.is_timer) return;
+                this.is_timer = true;
                 this.$vux.loading.show({text:'Loading'});
-                Util.sendEmail(this.email_value,(data) => {
+                Util.sendEmail(this.email_value,(result) => {
                     this.$vux.loading.hide();
+                    this.is_timer = false;
                     setTimeout(() => {
-                        if (data.status == 1) {
+                        if (result.status == 1) {
                             this.showMsg('验证邮件已发送');
                             this.is_popup = true;
                         } else{
@@ -120,6 +124,8 @@
                     this.showMsg('请输入验证码');
                     return;
                 }
+                if(this.is_timer) return;
+                this.is_timer = true;
                 var new_user = {
                     user_name: this.name_value,
                     user_email: this.email_value,
@@ -128,12 +134,15 @@
                     user_code: this.code_value
                 };
                 this.$vux.loading.show({text:'Loading'});
-                Util.register(new_user,(data) => {
+                Util.register(new_user,(result) => {
                     this.$vux.loading.hide();
+                    this.is_timer = false;
                     setTimeout(() => {
-                        this.showMsg(data.msg);
-                        if (data.status == 1) this.reset();
-                        this.is_popup = false;
+                        if(result.status == 1){
+                            this.is_popup = false;
+                            this.reset();
+                        }
+                        this.showMsg(result.msg);
                     },100)
                 });
             },
@@ -184,8 +193,8 @@
             },
             checkUserName () {
                 if(!this.name_value) return;
-                Util.checkUserRepeat({user_name: this.name_value},(data) => {
-                    if (data.status == 0) {
+                Util.checkUserRepeat({user_name: this.name_value},(result) => {
+                    if (result.status == 0) {
                         this.showMsg('帐号已存在');
                         this.is_name_repeat = true;
                     }else {
@@ -196,8 +205,8 @@
             },
             checkUserEmail () {
                 if(!this.email_value || !(/^(\w)+(\.\w+)*@(\w)+((\.\w+)+)$/).test(this.email_value)) return;
-                Util.checkUserRepeat({user_email: this.email_value},(data) => {
-                    if (data.status == 0) {
+                Util.checkUserRepeat({user_email: this.email_value},(result) => {
+                    if (result.status == 0) {
                         this.showMsg('邮箱已存在');
                         this.is_email_repeat = true;
                     }else {

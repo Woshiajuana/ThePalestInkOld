@@ -66,20 +66,23 @@
                     user_name: this.name_value,
                     user_password: this.password_value
                 };
-                Util.login(user,(data) => {
-                    if (data.status == 1) {
-                        /**帐号密码验证合法*/
-                        var data = data.data;
-                        console.log(data.token);
-                        console.log(data.user);
-                        Tool.dataToSessionStorageOperate.save('token',data.token);
-                        Tool.dataToSessionStorageOperate.save('user',data.user);
-                        this.rememberUser(user);
-                        this.$store.commit(types.JUDGE_IS_NOT_FIRST,true);
-                        this.$router.push('/');
-                    } else {
-                        this.showMsg(data.msg);
-                    }
+                this.$vux.loading.show({text:'Loading'});
+                Util.login(user,(result) => {
+                    this.$vux.loading.hide();
+                    setTimeout(() => {
+                        console.log(result)
+                        if (result.status == 1) {
+                            /**帐号密码验证合法*/
+                            var data = result.data;
+                            Tool.dataToSessionStorageOperate.save('token',data.token);
+                            Tool.dataToSessionStorageOperate.save('user',data.user);
+                            this.rememberUser(user);
+                            this.$store.commit(types.JUDGE_IS_NOT_FIRST,true);
+                            this.$router.push('/');
+                        } else {
+                            this.showMsg(result.msg);
+                        }
+                    },100)
                 })
             },
             checkInput () {
