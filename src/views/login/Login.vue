@@ -70,7 +70,6 @@
                 Util.login(user,(result) => {
                     this.$vux.loading.hide();
                     setTimeout(() => {
-                        console.log(result)
                         if (result.status == 1) {
                             /**帐号密码验证合法*/
                             var data = result.data;

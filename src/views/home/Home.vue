@@ -61,8 +61,8 @@
             },
             /**获取可用余额*/
             fetchBalance () {
-                Util.fetchTotalBalance( (data) => {
-                    this.total_balance = data.data.total_balance;
+                Util.fetchTotalBalance( (result) => {
+                    this.total_balance = result.data.balance;
                     setTimeout( () => {
                         this.$nextTick(() => {
                             new CountUp("total_balance", 0, this.total_balance, 2, 2).start();
