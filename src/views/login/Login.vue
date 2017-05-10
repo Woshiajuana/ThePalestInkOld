@@ -196,9 +196,9 @@
     }
     .input-icon{
         @extend %vam;
-        width: 25px;
+        width: 20px;
         padding-right: 10px;
-        height: 25px;
+        height: 20px;
         fill: #999;
         transition: fill .5s;
     }

@@ -25,9 +25,14 @@ const Util = function (win) {
         Util.ajax( '/thepalestink/login', user, 'POST', success_callback, fail_callback );
     };
 
-    /**验证注册时用户名是否已注册*/
-    Util.checkUserName = function (user_name,success_callback, fail_callback) {
-        Util.ajax( '/thepalestink/checkUserName', {user_name}, 'GET', success_callback, fail_callback );
+    /**验证注册时信息是否已存在*/
+    Util.checkUserRepeat = function (user_msg,success_callback, fail_callback) {
+        Util.ajax( '/thepalestink/checkUserRepeat', {user_msg}, 'GET', success_callback, fail_callback );
+    };
+
+    /**发送邮件*/
+    Util.sendEmail = function (user_email,success_callback,fail_callback) {
+        Util.ajax( '/thepalestink/sendEmail', {user_email:user_email}, 'GET', success_callback, fail_callback );
     };
 
     /**用户注册*/
@@ -35,12 +40,11 @@ const Util = function (win) {
         Util.ajax( '/thepalestink/register', new_user, 'POST', success_callback, fail_callback );
     };
 
-
     /**
      * 请求总共可用余额
      * */
     Util.fetchTotalBalance = function (success_callback, fail_callback) {
-        Util.ajax( '/static/mock/balance.json', '', 'GET', success_callback, fail_callback );
+        Util.ajax( '/thepalestink/fetchTotalBalance', '', 'GET', success_callback, fail_callback );
     };
 
     /**
