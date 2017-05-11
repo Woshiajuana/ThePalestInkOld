@@ -42,17 +42,19 @@
         created () {
             this.$store.commit(types.SET_NAV_INDEX,'4');
             this.fetchBillData();
-
         },
         methods: {
             onScroll (pos) {
                 this.scrollTop = pos.top;
             },
-            fetchBillData () {
+            fetchBillData (query_condition) {
                 var bill_arr = [];
                 this.$vux.loading.show({text:'Loading'});
                 var user_name = Tool.dataToSessionStorageOperate.achieve('user').user_name;
-                Util.fetchBill(user_name,(result) => {
+                var obj = {};
+                obj.user_name = user_name;
+                query_condition && (obj.query_condition = query_condition);
+                Util.fetchBill(obj,(result) => {
                     setTimeout(() => {
                         this.$vux.loading.hide();
                         if (result.status == 1) {

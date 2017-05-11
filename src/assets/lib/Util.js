@@ -56,8 +56,8 @@ const Util = function (win) {
     /**
      * 请求账单
      * */
-    Util.fetchBill = function (user_name, success_callback, fail_callback) {
-        Util.ajax( '/thepalestink/fetchBill',{user_name:user_name},'GET', success_callback,fail_callback);
+    Util.fetchBill = function (obj, success_callback, fail_callback) {
+        Util.ajax( '/thepalestink/fetchBill',obj,'GET', success_callback,fail_callback);
     };
 
     /**

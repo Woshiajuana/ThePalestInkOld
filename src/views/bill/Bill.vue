@@ -293,7 +293,10 @@
             fetchBillArr (query_condition) {
                 this.$vux.loading.show({text:'Loading'});
                 var user_name = Tool.dataToSessionStorageOperate.achieve('user').user_name;
-                Util.fetchBill(user_name,(result) => {
+                var obj = {};
+                obj.user_name = user_name;
+                query_condition && (obj.query_condition = query_condition);
+                Util.fetchBill(obj,(result) => {
                     setTimeout(() => {
                         this.$vux.loading.hide();
                         if (result.status == 1) {
