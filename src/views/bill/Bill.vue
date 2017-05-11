@@ -225,7 +225,8 @@
                     upContent: '拉人家干嘛~~~',
                     loadingContent: 'Loading...',
                     clsPrefix: 'xs-plugin-pullup-'
-                }
+                },
+                is_timer: false
             }
         },
         created () {
@@ -271,30 +272,39 @@
             },
             /**删除账单信息*/
             removeBill () {
+                if(this.is_timer) return;
+                this.is_timer = true;
+                this.$vux.loading.show({text:'Loading'});
                 var user_name = Tool.dataToSessionStorageOperate.achieve('user').user_name;
                 Util.removeBill(user_name,this.remove_bill,(result) => {
-                    if(result.status == 1) {
-                        this.fetchBillArr();
-                    }
-                    this.showMsg(result.msg);
-                    this.show_dialog = false;
+                    setTimeout(() => {
+                        this.is_timer = false;
+                        this.$vux.loading.hide();
+                        if(result.status == 1) {
+                            this.fetchBillArr();
+                        }
+                        this.showMsg(result.msg);
+                        this.show_dialog = false;
+                    },100)
                 })
 
             },
             /**获取账单信息*/
             fetchBillArr (query_condition) {
+                this.$vux.loading.show({text:'Loading'});
                 var user_name = Tool.dataToSessionStorageOperate.achieve('user').user_name;
                 Util.fetchBill(user_name,(result) => {
-                    if (result.status == 1) {
-                        this.bill_arr = result.data.bills;
-                    } else {
-
-                    }
-                    this.$nextTick(() => {
-                        this.$refs.billScrollEvent.reset();
-                    });
-                    /**提示信息*/
-                    this.countSum();
+                    setTimeout(() => {
+                        this.$vux.loading.hide();
+                        if (result.status == 1) {
+                            this.bill_arr = result.data.bills;
+                        }
+                        this.$nextTick(() => {
+                            this.$refs.billScrollEvent.reset();
+                        });
+                        /**提示信息*/
+                        this.countSum();
+                    },100)
                 });
 
             },
