@@ -14,6 +14,7 @@ import Register from '../views/register/Register.vue'
 import Error from '../views/error/Error.vue'
 import Agreement from '../views/agreement/Agreement.vue'
 import Modify from '../views/modify/Modify.vue'
+import Retrieve from '../views/retrieve/Retrieve.vue'
 
 import Tool from '../assets/lib/Tool'
 
@@ -110,6 +111,15 @@ const router = new Router({
                 status: 8
             }
         },
+        /**找回密码页面*/
+        {
+            path: '/retrieve',
+            name: 'retrieve',
+            component: Retrieve,
+            meta: {
+                status: 9
+            }
+        },
         /**修改密码*/
         {
             path: '/modify',
@@ -162,7 +172,7 @@ router.beforeEach( (to, from, next) => {
         /**用户第一次进入且路径跳转不是为引导页的时候，跳转到引导页*/
         console.log(3)
         next('/guide');
-    } else if ( is_not_first && !user && to.path != '/login' && to.path != '/register') {
+    } else if ( is_not_first && !user && to.path != '/login' && to.path != '/register' && to.path != '/agreement' && to.path != '/retrieve') {
         console.log(4)
         /**用户没有登录，且用户跳转的路径不是登录页也不能是注册页的时候*/
         next('/login');

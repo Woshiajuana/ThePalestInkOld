@@ -72,6 +72,11 @@ const Util = function (win) {
         Util.ajax( '/thepalestink/modifyPassword',obj,'GET', success_callback,fail_callback);
     };
 
+    /**找回密码*/
+    Util.retrievePassword = function (obj,success_callback,fail_callback) {
+        Util.ajax( '/thepalestink/retrievePassword',obj,'GET', success_callback,fail_callback);
+    };
+
     /**
      * 公用请求ajax的方式
      * */

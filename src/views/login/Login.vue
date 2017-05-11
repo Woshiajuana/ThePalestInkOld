@@ -22,7 +22,7 @@
                 <i class="remember-type"></i>
                 记住密码
             </span>
-            <a href="#/" class="back-password">忘记密码？</a>
+            <a href="#/retrieve" class="back-password">忘记密码？</a>
         </div>
         <i class="sure-btn" @click="login()" :class="{'sure-active-true':name_value && password_value}">登录</i>
         <a href="#/register" class="user-link">没有帐号？点我去注册</a>
