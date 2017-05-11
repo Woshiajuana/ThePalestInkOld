@@ -70,9 +70,17 @@
 <style lang="scss">
     @import "./assets/scss/reset";
     @import "./assets/scss/define";
+    html{
+        @extend %h100;
+    }
     body{
         @extend %oh;
+        @extend %h100;
         background-color: #F9FAFC;
+    }
+    #app{
+        @extend %h100;
+
     }
     .home-wrap,
     .container-view{

@@ -12,17 +12,29 @@
                 </h1>
             </div>
             <div class="home-btn-wrap">
-                <a href="#/account/consumption" class="go-account go-consumption">消费</a>
-                <a href="#/account/earn" class="go-account go-earn">入账</a>
+                <a href="#/modify" class="go-account go-earn">修改密码</a>
+                <i @click="is_popup = true" class="go-account go-consumption">安全退出</i>
             </div>
             <svg @click="is_open = true" class="home-arrow" v-show="!is_open">
                 <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#nav-arrow"></use>
             </svg>
+
+            <!--弹窗提示-->
+            <x-dialog v-model="is_popup" class="dialog-demo" hide-on-blur>
+                <div class="dialog-con">
+                    确定要退出吗？
+                </div>
+                <span class="bill-dialog-close"  @click="is_popup = false"></span>
+                <div class="bill-dialog-box" @click="safeExit()">
+                    <span class="bill-dialog-ok"></span>
+                </div>
+            </x-dialog>
+            <!--/弹窗提示-->
         </div>
     </div>
 </template>
 <script>
-    import { Scroller, Spinner} from 'vux'
+    import { Scroller, Spinner, XDialog} from 'vux'
     import GestureMobile from '../../assets/lib/GestureMobile'
     import types from '../../store/mutation-types'
     import CountUp from '../../assets/lib/countUp'
@@ -33,12 +45,14 @@
         data: function () {
             return {
                 is_open: false,
-                total_balance: 0
+                total_balance: 0,
+                is_popup: false
             }
         },
         components:{
             Scroller,
-            Spinner
+            Spinner,
+            XDialog
         },
         created () {
             this.fetchBalance();
@@ -46,6 +60,12 @@
             this.setNavIndex();
         },
         methods: {
+            /**安全退出*/
+            safeExit () {
+                this.is_popup = false;
+                Tool.dataToSessionStorageOperate.clear();
+                this.$router.push('/login');
+            },
             /**手势*/
             gestureMobile () {
                 this.$nextTick(() => {

@@ -13,6 +13,7 @@ import Login from '../views/login/Login.vue'
 import Register from '../views/register/Register.vue'
 import Error from '../views/error/Error.vue'
 import Agreement from '../views/agreement/Agreement.vue'
+import Modify from '../views/modify/Modify.vue'
 
 import Tool from '../assets/lib/Tool'
 
@@ -107,6 +108,15 @@ const router = new Router({
             component: Chart,
             meta: {
                 status: 8
+            }
+        },
+        /**修改密码*/
+        {
+            path: '/modify',
+            name: 'modify',
+            component: Modify,
+            meta: {
+                status: 9
             }
         },
         /**协议页面*/
