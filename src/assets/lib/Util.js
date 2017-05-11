@@ -61,6 +61,13 @@ const Util = function (win) {
     };
 
     /**
+     * 删除账单
+     * */
+    Util.removeBill = function (user_name, bill, success_callback, fail_callback) {
+        Util.ajax( '/thepalestink/removeBill',{user_name:user_name,bill: bill},'GET', success_callback,fail_callback);
+    };
+
+    /**
      * 公用请求ajax的方式
      * */
     Util.ajax = function (path, data, http_method, success_callback, fail_callback) {

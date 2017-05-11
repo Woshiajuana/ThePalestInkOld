@@ -27,6 +27,7 @@
     import types from '../../store/mutation-types'
     import CountUp from '../../assets/lib/countUp'
     import Util from '../../assets/lib/Util'
+    import Tool from '../../assets/lib/Tool'
     export default {
         name: 'home',
         data: function () {
@@ -61,7 +62,8 @@
             },
             /**获取可用余额*/
             fetchBalance () {
-                Util.fetchTotalBalance( (result) => {
+                var user_name = Tool.dataToSessionStorageOperate.achieve('user').user_name;
+                Util.fetchTotalBalance(user_name,(result) => {
                     this.total_balance = result.data.balance;
                     setTimeout( () => {
                         this.$nextTick(() => {

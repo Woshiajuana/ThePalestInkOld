@@ -128,17 +128,17 @@
                     <ul class="bill-list">
                         <li class="bill-item" v-for="(bill_item,bill_index) in bill_arr">
                             <span class="bill-item-type"
-                                :class="{'earn-type': bill_item.consumption_or_earn == 1,
-                                 'consumption-type': bill_item.consumption_or_earn == 0}">
+                                :class="{'earn-type': bill_item.bill_consumption_or_earn == 1,
+                                 'consumption-type': bill_item.bill_consumption_or_earn == 0}">
                                 <svg class="bill-item-type-icon">
-                                    <use xmlns:xlink="http://www.w3.org/1999/xlink" :xlink:href="'#type-'+ bill_item.billTypeNumber"></use>
+                                    <use xmlns:xlink="http://www.w3.org/1999/xlink" :xlink:href="'#type-'+ bill_item.bill_type_number"></use>
                                 </svg>
                             </span>
                             <p class="bill-item-con">
-                                <span class="bill-item-remark" v-text="bill_item.remarks_value || bill_item.account_type[0]"></span>
-                                <span class="bill-item-sum" v-text="bill_item.sum_value"></span>
+                                <span class="bill-item-remark" v-text="bill_item.bill_remarks || bill_item.bill_account_type[0]"></span>
+                                <span class="bill-item-sum" v-text="bill_item.bill_sum"></span>
                             </p>
-                            <p class="bill-item-time">{{bill_item.consumption_or_earn == 1 ? '入账' : '消费'}}时间：{{bill_item.date_value}} {{bill_item.time_value}}</p>
+                            <p class="bill-item-time">{{bill_item.bill_consumption_or_earn == 1 ? '入账' : '消费'}}时间：{{bill_item.bill_date}} {{bill_item.bill_time}}</p>
                             <i class="bill-cancel" @click="confirmRemoveBill(bill_item)">取消</i>
                         </li>
                         <li class="bill-item-null"></li>
@@ -235,8 +235,6 @@
             this.gestureMobile();
             /**获取账单列表*/
             this.fetchBillArr();
-            /**提示信息*/
-            this.countSum();
         },
         components: {
             Scroller,
@@ -273,28 +271,32 @@
             },
             /**删除账单信息*/
             removeBill () {
-                Util.Bill.remove(this.remove_bill);
-                this.fetchBillArr();
-                var earn_sum = this.earn_sum,
-                    consumption_sum = this.consumption_sum;
-                if (this.remove_bill.consumption_or_earn == 0){
-                    this.consumption_sum = this.consumption_sum - this.remove_bill.sum_value;
-                } else {
-                    this.earn_sum = this.earn_sum - this.remove_bill.sum_value;
-                }
-                this.$nextTick(() => {
-                    new CountUp("earn-sum", earn_sum, this.earn_sum, 2, 2).start();
-                    new CountUp("consumption-sum", consumption_sum, this.consumption_sum, 2, 2).start();
-                    new CountUp("balance-sum", (earn_sum - consumption_sum), (this.earn_sum - this.consumption_sum), 2, 2).start();
-                });
-                this.show_dialog = false;
+                var user_name = Tool.dataToSessionStorageOperate.achieve('user').user_name;
+                Util.removeBill(user_name,this.remove_bill,(result) => {
+                    if(result.status == 1) {
+                        this.fetchBillArr();
+                    }
+                    this.showMsg(result.msg);
+                    this.show_dialog = false;
+                })
+
             },
             /**获取账单信息*/
             fetchBillArr (query_condition) {
-                this.bill_arr = Util.Bill.query(query_condition);
-                this.$nextTick(() => {
-                    this.$refs.billScrollEvent.reset();
+                var user_name = Tool.dataToSessionStorageOperate.achieve('user').user_name;
+                Util.fetchBill(user_name,(result) => {
+                    if (result.status == 1) {
+                        this.bill_arr = result.data.bills;
+                    } else {
+
+                    }
+                    this.$nextTick(() => {
+                        this.$refs.billScrollEvent.reset();
+                    });
+                    /**提示信息*/
+                    this.countSum();
                 });
+
             },
             /**提示信息*/
             showMsg (msg) {
@@ -326,10 +328,10 @@
                 this.earn_sum = 0;
                 this.consumption_sum = 0;
                 this.bill_arr.forEach((item,index) => {
-                    if(item.consumption_or_earn == 1)
-                        this.earn_sum =  this.earn_sum + (+item.sum_value);
+                    if(item.bill_consumption_or_earn == 1)
+                        this.earn_sum =  this.earn_sum + (+item.bill_sum);
                     else
-                        this.consumption_sum =  this.consumption_sum + (+item.sum_value);
+                        this.consumption_sum =  this.consumption_sum + (+item.bill_sum);
                 });
                 this.$nextTick(() => {
                     new CountUp("earn-sum", earn_sum, this.earn_sum, 2, 2).start();

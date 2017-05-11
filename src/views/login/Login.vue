@@ -40,7 +40,8 @@
             return {
                 is_remember: true,
                 name_value: '',
-                password_value: ''
+                password_value: '',
+                is_timer: false
             }
         },
         created () {
@@ -62,14 +63,17 @@
             /**登录*/
             login () {
                 if (this.checkInput()) return;
+                if (this.is_timer) return;
+                this.is_timer = true;
                 var user = {
                     user_name: this.name_value,
                     user_password: this.password_value
                 };
                 this.$vux.loading.show({text:'Loading'});
                 Util.login(user,(result) => {
-                    this.$vux.loading.hide();
                     setTimeout(() => {
+                        this.$vux.loading.hide();
+                        this.is_timer = false;
                         if (result.status == 1) {
                             /**帐号密码验证合法*/
                             var data = result.data;

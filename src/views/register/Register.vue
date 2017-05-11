@@ -106,9 +106,9 @@
                 this.is_timer = true;
                 this.$vux.loading.show({text:'Loading'});
                 Util.sendEmail(this.email_value,(result) => {
-                    this.$vux.loading.hide();
-                    this.is_timer = false;
                     setTimeout(() => {
+                        this.$vux.loading.hide();
+                        this.is_timer = false;
                         if (result.status == 1) {
                             this.showMsg('验证邮件已发送');
                             this.is_popup = true;
@@ -135,9 +135,9 @@
                 };
                 this.$vux.loading.show({text:'Loading'});
                 Util.register(new_user,(result) => {
-                    this.$vux.loading.hide();
-                    this.is_timer = false;
                     setTimeout(() => {
+                        this.$vux.loading.hide();
+                        this.is_timer = false;
                         if(result.status == 1){
                             this.is_popup = false;
                             this.reset();
