@@ -57,7 +57,8 @@
                 account_type_arr: [['水果零食','餐饮伙食', '出行旅游', '网上购物', '生活日常', '租房水电', '医疗药物','其它消费']],
                 account_type:['水果零食'],
                 date_value: 'TODAY',
-                time_value: Tool.format('hh:mm')
+                time_value: Tool.format('hh:mm'),
+                is_timer: false
             }
         },
         methods: {
@@ -67,19 +68,29 @@
                     this.showMsg('请填写消费金额');
                     return;
                 }
+                if(this.is_timer) return;
+                this.is_timer = true;
+                this.$vux.loading.show({text:'Loading'});
                 var bill = {
-                    _id: Date.parse(new Date()),
                     sum_value: this.sum_value,
                     date_value: this.date_value,
                     time_value: this.time_value,
                     remarks_value: this.remarks_value,
                     account_type: this.account_type,
-                    billTypeNumber: this.billTypeNumber(this.account_type),
-                    consumption_or_earn: 0
+                    type_number: this.billTypeNumber(this.account_type),
+                    consumption_or_earn: 0,
+                    user_name: Tool.dataToSessionStorageOperate.achieve('user').user_name
                 };
-                Util.Bill.save(bill);
-                this.showMsg('记账成功');
-                this.resetValue();
+                Util.addBill(bill, (result) => {
+                    setTimeout(() => {
+                        this.$vux.loading.hide();
+                        this.is_timer = false;
+                        if (result.status == 1) {
+                            this.resetValue();
+                        }
+                        this.showMsg(result.msg);
+                    },100)
+                });
             },
             showMsg (msg) {
                 this.$vux.toast.show({

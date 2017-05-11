@@ -42,8 +42,22 @@ const Util = function (win) {
     /**
      * 请求总共可用余额
      * */
-    Util.fetchTotalBalance = function (success_callback, fail_callback) {
-        Util.ajax( '/thepalestink/fetchTotalBalance', '', 'GET', success_callback, fail_callback );
+    Util.fetchTotalBalance = function (user_name,success_callback, fail_callback) {
+        Util.ajax( '/thepalestink/fetchTotalBalance', {user_name: user_name}, 'GET', success_callback, fail_callback );
+    };
+
+    /**
+     * 添加账单
+     * */
+    Util.addBill = function (bill, success_callback, fail_callback) {
+        Util.ajax( '/thepalestink/addBill', bill, 'GET', success_callback, fail_callback );
+    };
+
+    /**
+     * 请求账单
+     * */
+    Util.fetchBill = function (user_name, success_callback, fail_callback) {
+        Util.ajax( '/thepalestink/fetchBill',{user_name:user_name},'GET', success_callback,fail_callback);
     };
 
     /**
@@ -60,6 +74,7 @@ const Util = function (win) {
             /**没有登录跳转登录页面*/
             if (data.status === -1) {
                 Tool.dataToSessionStorageOperate.remove('user');
+                Tool.dataToSessionStorageOperate.remove('token');
                 router.push('/login');
             } else if (data.status === 2) {
                 router.push('/error');
