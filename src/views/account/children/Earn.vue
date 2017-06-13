@@ -67,6 +67,10 @@
                     this.showMsg('请填写入账金额');
                     return;
                 }
+                if(isNaN(+this.sum_value)) {
+                    this.showMsg('入账金额错误');
+                    return;
+                }
                 var bill = {
                     _id: Date.parse(new Date()),
                     sum_value: this.sum_value,
