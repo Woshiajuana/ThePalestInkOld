@@ -130,9 +130,11 @@
                             <span class="bill-item-type"
                                 :class="{'earn-type': bill_item.consumption_or_earn == 1,
                                  'consumption-type': bill_item.consumption_or_earn == 0}">
-                                <svg class="bill-item-type-icon">
-                                    <use xmlns:xlink="http://www.w3.org/1999/xlink" :xlink:href="'#type-'+ bill_item.billTypeNumber"></use>
-                                </svg>
+                                <a :href="bill_item.consumption_or_earn ? '#/account/earn?account_type=' + bill_item.account_type[0] : '#/account/consumption?account_type=' + bill_item.account_type[0]">
+                                    <svg class="bill-item-type-icon">
+                                        <use xmlns:xlink="http://www.w3.org/1999/xlink" :xlink:href="'#type-'+ bill_item.billTypeNumber"></use>
+                                    </svg>
+                                </a>
                             </span>
                             <p class="bill-item-con">
                                 <span class="bill-item-remark" v-text="bill_item.remarks_value || bill_item.account_type[0]"></span>
@@ -623,10 +625,14 @@
         height: 50px;
         margin-top: -25px;
         &.earn-type{
-            fill: #13CE66;
+            .bill-item-type-icon{
+                fill: #13CE66;
+            }
         }
         &.consumption-type{
-            fill: #FF4949;
+            .bill-item-type-icon {
+                fill: #FF4949;
+            }
         }
     }
     .bill-item-type-icon{

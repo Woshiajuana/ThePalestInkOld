@@ -59,6 +59,9 @@
         },
         created () {
             this.setNavIndex();
+            if(this.$route.query.account_type) {
+                this.account_type = [this.$route.query.account_type]
+            }
         },
         methods: {
             /**提交账单*/
