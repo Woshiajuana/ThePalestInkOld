@@ -166,7 +166,7 @@
         margin-left: -60px;
         line-height: 40px;
         background-color: #58B7FF;
-    },
+    }
     .guide-wrap-hide{
         animation-name: guide-fadeOutUp;
     }
